@@ -20,24 +20,24 @@
         <div class="hero-content">
             <h1>Top Interstate Moving Companies</h1>
             <p class="lead">Compare FMCSA Verified Movers (2025)</p>
-            <p class="mb-4">Looking for trusted long-distance movers? MoveEase helps you compare and book the best long-distance and interstate moving companies in the USA. All movers are FMCSA verified, reviewed by real customers, and rated to make your move stress-free and affordable.</p>
+            {{-- <p class="mb-4">Looking for trusted long-distance movers? MoveEase helps you compare and book the best long-distance and interstate moving companies in the USA. All movers are FMCSA verified, reviewed by real customers, and rated to make your move stress-free and affordable.</p> --}}
             
             <div class="search-form">
                 <form id="quoteForm">
                     <div class="row g-3">
                         <div class="col-md-4">
                             <label class="form-label text-muted">Moving From*</label>
-                            <input type="text" class="form-control" id="zip_from" placeholder="Enter ZIP or City" autocomplete="off">
+                            <input type="text" class="form-control zipfrom" id="zip_from" placeholder="Enter ZIP or City" autocomplete="off">
                             <div class="form-text" id="zip_from_suggestion"></div>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label text-muted">Moving To*</label>
-                            <input type="text" class="form-control" id="zip_to" placeholder="Enter ZIP or City" autocomplete="off">
+                            <input type="text" class="form-control zipto" id="zip_to" placeholder="Enter ZIP or City" autocomplete="off">
                             <div class="form-text" id="zip_to_suggestion"></div>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label text-muted">Moving Date</label>
-                            <input type="text" class="form-control" id="move_date" placeholder="YYYY-MM-DD">
+                            <input type="text" class="form-control movedate" id="move_date" placeholder="YYYY-MM-DD">
                         </div>
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary btn-lg w-100" id="getQuoteBtn">
@@ -64,7 +64,7 @@
 </section>
 
 <!-- Routes CTA Section -->
-<section class="cta-section">
+<section class="cta-section mt-5">
     <div class="container text-center">
         <h3 class="mb-3">Plan State-to-State or City-to-City</h3>
         <p class="mb-4">Browse routes with costs, distance, and movers. Start with your state.</p>
@@ -515,145 +515,5 @@ $homeFaqs = [
 @endsection
 
 @push('scripts')
-@if(config('services.google.maps_key'))
-<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.maps_key') }}&libraries=places"></script>
-@endif
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-(function(){
-  function attachAutocomplete(inputId, hintId){
-    const input = document.getElementById(inputId);
-    const hint = document.getElementById(hintId);
-    if(!input || !window.google) return;
-    const options = { componentRestrictions: { country: 'us' }, fields: ['address_components','formatted_address'], types: ['(regions)'] };
-    const ac = new google.maps.places.Autocomplete(input, options);
-    ac.addListener('place_changed', function(){
-      const place = ac.getPlace();
-      const postal = (place.address_components||[]).find(c=>c.types.includes('postal_code'));
-      const city = (place.address_components||[]).find(c=>c.types.includes('locality'));
-      const state = (place.address_components||[]).find(c=>c.types.includes('administrative_area_level_1'));
-      const full = place.formatted_address || [postal?.long_name, city?.long_name, state?.short_name,'USA'].filter(Boolean).join(', ');
-      if(postal){ input.dataset.postal = postal.long_name; input.value = postal.long_name; hint.textContent = full; }
-      else { delete input.dataset.postal; hint.textContent=''; }
-    });
-  }
-  attachAutocomplete('zip_from','zip_from_suggestion');
-  attachAutocomplete('zip_to','zip_to_suggestion');
-})();
-</script>
 
-
-<script>
-// Initialize date picker
-if (window.flatpickr) { flatpickr('#move_date', { dateFormat: 'Y-m-d', allowInput: true }); }
-
-// Animate feature cards on scroll
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.feature-card, .review-card').forEach(card => {
-    card.style.transition = 'all 0.6s ease';
-    observer.observe(card);
-});
-
-// Form validation and submission
-document.getElementById('quoteForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const zipFrom = document.getElementById('zip_from');
-    const zipTo = document.getElementById('zip_to');
-    const moveDate = document.getElementById('move_date');
-    let isValid = true;
-    
-    // Reset previous validation styles
-    [zipFrom, zipTo].forEach(input => {
-        input.classList.remove('is-invalid', 'is-valid');
-    });
-    
-    // Validate zip from
-    if (!zipFrom.value.trim()) {
-        zipFrom.classList.add('is-invalid');
-        isValid = false;
-    } else {
-        zipFrom.classList.add('is-valid');
-    }
-    
-    // Validate zip to
-    if (!zipTo.value.trim()) {
-        zipTo.classList.add('is-invalid');
-        isValid = false;
-    } else {
-        zipTo.classList.add('is-valid');
-    }
-    
-    if (!isValid) {
-        alert('Please fill in all required fields');
-        return;
-    }
-    
-    // Show loading state
-    const btn = document.getElementById('getQuoteBtn');
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Getting Quotes...';
-    btn.disabled = true;
-    
-    setTimeout(() => {
-        // Redirect to quote page with parameters
-        const params = new URLSearchParams({
-            zip_from: zipFrom.value,
-            zip_to: zipTo.value,
-            move_date: moveDate.value
-        });
-        window.location.href = "/get-quote?" + params.toString();
-    }, 1500);
-});
-
-// Add state dropdown functionality
-document.querySelectorAll('.state-header').forEach(header => {
-    header.addEventListener('click', function() {
-        const state = this.getAttribute('data-state');
-        const content = document.getElementById(state + '-content');
-        const icon = this.querySelector('i');
-        
-        // Close all other dropdowns
-        document.querySelectorAll('.state-content').forEach(otherContent => {
-            if (otherContent !== content) {
-                otherContent.classList.remove('show');
-            }
-        });
-        
-        document.querySelectorAll('.state-header').forEach(otherHeader => {
-            if (otherHeader !== this) {
-                otherHeader.classList.remove('active');
-            }
-        });
-        
-        // Toggle current dropdown
-        content.classList.toggle('show');
-        this.classList.toggle('active');
-    });
-});
-
-// Add bounce animation to feature icons
-document.querySelectorAll('.feature-icon').forEach(icon => {
-    icon.addEventListener('mouseenter', function() {
-        this.style.animation = 'bounce 0.6s ease-in-out';
-    });
-    
-    icon.addEventListener('animationend', function() {
-        this.style.animation = '';
-    });
-});
-</script>
 @endpush

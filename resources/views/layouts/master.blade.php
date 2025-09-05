@@ -57,5 +57,158 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
+    @if(config('services.google.maps_key'))
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.maps_key') }}&libraries=places"></script>
+@endif
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+@if(config('services.google.maps_key'))
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.maps_key') }}&libraries=places"></script>
+@endif
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+(function(){
+  function attachAutocomplete(input) {
+    if (!input || !window.google) return;
+    const options = { 
+      componentRestrictions: { country: 'us' }, 
+      fields: ['address_components','formatted_address'], 
+      types: ['(regions)'] 
+    };
+    const ac = new google.maps.places.Autocomplete(input, options);
+    ac.addListener('place_changed', function(){
+      const place = ac.getPlace();
+      const postal = (place.address_components||[]).find(c=>c.types.includes('postal_code'));
+      const city   = (place.address_components||[]).find(c=>c.types.includes('locality'));
+      const state  = (place.address_components||[]).find(c=>c.types.includes('administrative_area_level_1'));
+
+      // 👇 Full formatted value
+      const full = [postal?.long_name, city?.long_name, state?.short_name, 'USA']
+        .filter(Boolean)
+        .join(', ');
+
+      if(postal){
+        // Input me full value show karo
+        input.value = full;
+
+        // Hidden fields (agar hain to fill kar do)
+        const wrapper = input.closest('div');
+        if(wrapper){
+          const zipEl   = wrapper.querySelector('.hidden-zip');
+          const cityEl  = wrapper.querySelector('.hidden-city');
+          const stateEl = wrapper.querySelector('.hidden-state');
+          if(zipEl)   zipEl.value   = postal?.long_name || '';
+          if(cityEl)  cityEl.value  = city?.long_name   || '';
+          if(stateEl) stateEl.value = state?.short_name || '';
+        }
+
+        // Optional suggestion span
+        const hint = input.closest('div')?.querySelector('.zip-suggestion');
+        if(hint) hint.textContent = full;
+      } else {
+        const wrapper = input.closest('div');
+        if(wrapper){
+          const zipEl   = wrapper.querySelector('.hidden-zip');
+          const cityEl  = wrapper.querySelector('.hidden-city');
+          const stateEl = wrapper.querySelector('.hidden-state');
+          if(zipEl)   zipEl.value   = '';
+          if(cityEl)  cityEl.value  = '';
+          if(stateEl) stateEl.value = '';
+        }
+        const hint = input.closest('div')?.querySelector('.zip-suggestion');
+        if(hint) hint.textContent = '';
+      }
+    });
+  }
+
+  // Apply autocomplete globally
+  document.querySelectorAll('.zipfrom, .zipto').forEach(input => {
+    attachAutocomplete(input);
+  });
+})();
+</script>
+
+<script>
+// Initialize date picker
+if (window.flatpickr) { 
+  flatpickr('.movedate', { dateFormat: 'Y-m-d', allowInput: true }); 
+}
+
+// Animate feature cards on scroll
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.feature-card, .review-card').forEach(card => {
+    card.style.transition = 'all 0.6s ease';
+    observer.observe(card);
+});
+
+// Form validation and submission
+const form = document.getElementById('quoteForm');
+if(form){
+  form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const zipFrom = form.querySelector('.zipfrom');
+      const zipTo   = form.querySelector('.zipto');
+      const moveDate = form.querySelector('.movedate');
+      let isValid = true;
+      
+      [zipFrom, zipTo].forEach(input => input.classList.remove('is-invalid','is-valid'));
+      
+      if (!zipFrom.value.trim()) { zipFrom.classList.add('is-invalid'); isValid = false; } 
+      else { zipFrom.classList.add('is-valid'); }
+      
+      if (!zipTo.value.trim()) { zipTo.classList.add('is-invalid'); isValid = false; } 
+      else { zipTo.classList.add('is-valid'); }
+      
+      if (!isValid) { alert('Please fill in all required fields'); return; }
+      
+      const btn = document.getElementById('getQuoteBtn');
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Getting Quotes...';
+      btn.disabled = true;
+      
+      setTimeout(() => {
+          const params = new URLSearchParams({
+              zip_from: zipFrom.value,
+              zip_to: zipTo.value,
+              movedate: moveDate.value
+          });
+          window.location.href = "/get-quote?" + params.toString();
+      }, 1500);
+  });
+}
+
+// State dropdown toggle
+document.querySelectorAll('.state-header').forEach(header => {
+    header.addEventListener('click', function() {
+        const state = this.getAttribute('data-state');
+        const content = document.getElementById(state + '-content');
+        
+        document.querySelectorAll('.state-content').forEach(c => { if(c !== content) c.classList.remove('show'); });
+        document.querySelectorAll('.state-header').forEach(h => { if(h !== this) h.classList.remove('active'); });
+        
+        content.classList.toggle('show');
+        this.classList.toggle('active');
+    });
+});
+
+// Bounce animation on feature icons
+document.querySelectorAll('.feature-icon').forEach(icon => {
+    icon.addEventListener('mouseenter', function() { this.style.animation = 'bounce 0.6s ease-in-out'; });
+    icon.addEventListener('animationend', function() { this.style.animation = ''; });
+});
+</script>
+
+
 </body>
 </html>

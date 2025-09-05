@@ -301,7 +301,9 @@
     gap: 10px;
     align-items: center;
 }
-
+svg{
+    width: 30px !important;
+}
 .page-link {
     padding: 10px 15px;
     border: 2px solid #e9ecef;

@@ -149,6 +149,9 @@
     background-color: var(--primary-color);
     border-color: var(--primary-color);
 }
+svg{
+    width: 30px !important;
+}
 </style>
 @endpush
 

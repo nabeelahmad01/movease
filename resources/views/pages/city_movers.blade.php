@@ -47,11 +47,11 @@
               <div class="row g-4">
                 <div class="col-md-6">
                   <label class="form-label fw-bold">Moving From</label>
-                  <input type="text" class="form-control" id="calc_from" placeholder="Enter zip code">
+                  <input type="text" class="form-control zipfrom" id="calc_from" placeholder="Enter zip code">
                 </div>
                 <div class="col-md-6">
                   <label class="form-label fw-bold">Moving To</label>
-                  <input type="text" class="form-control" id="calc_to" placeholder="Enter zip code" value="{{ $cityZip ?? '' }}">
+                  <input type="text" class="form-control zipto" id="calc_to" placeholder="Enter zip code" value="{{ $cityZip ?? '' }}">
                 </div>
                 <div class="col-md-6">
                   <label class="form-label fw-bold">Home Size</label>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-md-6">
                   <label class="form-label fw-bold">Moving Date</label>
-                  <input type="date" class="form-control" id="calc_date">
+                  <input type="date" class="form-control movedate" id="calc_date">
                 </div>
                 <div class="col-12">
                   <button type="button" class="btn btn-primary btn-lg w-100" onclick="calculateCost()">Calculate Cost</button>

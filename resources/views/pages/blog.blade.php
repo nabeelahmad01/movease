@@ -12,6 +12,11 @@
 
 @push('styles')
 <link href="{{ asset('assets/css/blog.css') }}" rel="stylesheet">
+<style>
+    svg{
+    width: 30px !important;
+}
+</style>
 @endpush
 
 <!-- Hero Section -->
@@ -49,7 +54,7 @@
                     <article class="blog-card">
                         <div class="blog-image">
                             @if($blog->featured_image)
-                                <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="{{ $blog->title }}">
+                                <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="{{ $blog->title }}" class="img-fluid">
                             @else
                                 <i class="fas fa-newspaper"></i>
                             @endif

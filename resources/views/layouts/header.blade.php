@@ -15,19 +15,6 @@
                     <a class="nav-link {{ request()->is('movers*') ? 'active' : '' }}" href="{{ route('front.movers') }}">Companies</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Services
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                        <li><a class="dropdown-item" href="{{ route('front.services') }}">All Services</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{{ route('front.services') }}?type=local">Local Moving</a></li>
-                        <li><a class="dropdown-item" href="{{ route('front.services') }}?type=interstate">Interstate Moving</a></li>
-                        <li><a class="dropdown-item" href="{{ route('front.services') }}?type=packing">Packing Services</a></li>
-                        <li><a class="dropdown-item" href="{{ route('front.services') }}?type=storage">Storage Solutions</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ request()->is('best-moving/*') ? 'active' : '' }}" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Resources
                     </a>

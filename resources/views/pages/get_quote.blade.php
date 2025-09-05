@@ -43,12 +43,12 @@
                     <div class="input-group">
                         <div class="form-group">
                             <label for="zip_from" class="form-label">Moving From*</label>
-                            <input type="text" class="form-control" id="zip_from" name="zip_from" value="{{ old('zip_from', request('zip_from')) }}" placeholder="Enter ZIP or City" autocomplete="off">
+                            <input type="text" class="form-control zipfrom" id="zip_from" name="zip_from" value="{{ old('zip_from', request('zip_from')) }}" placeholder="Enter ZIP or City" autocomplete="off">
                             <div class="form-text" id="zip_from_suggestion"></div>
                         </div>
                         <div class="form-group">
                             <label for="zip_to" class="form-label">Moving To*</label>
-                            <input type="text" class="form-control" id="zip_to" name="zip_to" value="{{ old('zip_to', request('zip_to')) }}" placeholder="Enter ZIP or City" autocomplete="off">
+                            <input type="text" class="form-control zipto" id="zip_to" name="zip_to" value="{{ old('zip_to', request('zip_to')) }}" placeholder="Enter ZIP or City" autocomplete="off">
                             <div class="form-text" id="zip_to_suggestion"></div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                     <div class="input-group">
                         <div class="form-group">
                             <label for="move_date" class="form-label">Preferred Moving Date</label>
-                            <input type="text" class="form-control" id="move_date" name="move_date" value="{{ old('move_date', request('move_date')) }}" placeholder="YYYY-MM-DD">
+                            <input type="text" class="form-control movedate" id="move_date" name="move_date" value="{{ old('move_date', request('move_date')) }}" placeholder="YYYY-MM-DD">
                         </div>
                     </div>
                     

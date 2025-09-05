@@ -26,15 +26,15 @@
             <div class="row g-2">
               <div class="col-md-4">
                 <label class="form-label text-muted">Moving From*</label>
-                <input type="text" id="rs_zip_from" name="zip_from" class="form-control" placeholder="ZIP or City" required autocomplete="off">
+                <input type="text" id="rs_zip_from" name="zip_from" class="form-control zipfrom" placeholder="ZIP or City" required autocomplete="off">
               </div>
               <div class="col-md-4">
                 <label class="form-label text-muted">Moving To*</label>
-                <input type="text" id="rs_zip_to" name="zip_to" class="form-control" placeholder="ZIP or City" required autocomplete="off">
+                <input type="text" id="rs_zip_to" name="zip_to" class="form-control zipto" placeholder="ZIP or City" required autocomplete="off">
               </div>
               <div class="col-md-4">
                 <label class="form-label text-muted">Moving Date</label>
-                <input type="text" id="rs_move_date" name="move_date" class="form-control" placeholder="YYYY-MM-DD">
+                <input type="text" id="rs_move_date" name="move_date" class="form-control movedate" placeholder="YYYY-MM-DD">
               </div>
               <div class="col-12">
                 <button class="btn btn-primary w-100"><i class="fas fa-calculator me-2"></i>Get Quote</button>

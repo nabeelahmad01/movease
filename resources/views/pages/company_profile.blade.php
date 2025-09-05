@@ -63,7 +63,9 @@
     margin-bottom: 2rem;
     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
 }
-
+svg{
+    width: 30px !important;
+}
 .filter-btn {
     background: #f8f9fa;
     border: 2px solid #e9ecef;
@@ -474,13 +476,13 @@
                     <form class="quote-form mb-4" action="/get-quote" method="GET">
                         <input type="hidden" name="company" value="{{ $company->id }}">
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="cp_zip_from" name="zip_from" placeholder="Moving From" required autocomplete="off">
+                            <input type="text" class="form-control zipfrom" id="cp_zip_from" name="zip_from" placeholder="Moving From" required autocomplete="off">
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="cp_zip_to" name="zip_to" placeholder="Moving To" required autocomplete="off">
+                            <input type="text" class="form-control zipto" id="cp_zip_to" name="zip_to" placeholder="Moving To" required autocomplete="off">
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="cp_move_date" name="move_date" placeholder="YYYY-MM-DD">
+                            <input type="text" class="form-control movedate" id="cp_move_date" name="move_date" placeholder="YYYY-MM-DD">
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Get My Quote</button>
                     </form>

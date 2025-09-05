@@ -204,7 +204,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-label">Move Date</label>
-                            <input type="date" name="move_date" class="form-control" value="{{ old('move_date') }}">
+                            <input type="date" name="move_date" class="form-control movedate" value="{{ old('move_date') }}">
                         </div>
                     </div>
                 </div>

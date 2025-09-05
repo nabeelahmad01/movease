@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
@@ -22,51 +23,51 @@ class SiteController extends Controller
     {
         // Get dynamic data from admin dashboard
         $reviews = Review::with('company')
-                        ->latest()
-                        ->take(6)
-                        ->get();
-        
+            ->latest()
+            ->take(6)
+            ->get();
+
         $featuredCompanies = Company::where('is_active', true)
-                                  ->with(['reviews', 'state'])
-                                  ->withAvg('reviews', 'rating')
-                                  ->withCount('reviews')
-                                  ->orderBy('created_at', 'desc')
-                                  ->take(6)
-                                  ->get();
-        
+            ->with(['reviews', 'state'])
+            ->withAvg('reviews', 'rating')
+            ->withCount('reviews')
+            ->orderBy('created_at', 'desc')
+            ->take(6)
+            ->get();
+
         $topMovers = TopMover::where('page', 'home')
-                            ->with('company')
-                            ->orderBy('id')
-                            ->take(6)
-                            ->get();
-        
+            ->with('company')
+            ->orderBy('id')
+            ->take(6)
+            ->get();
+
         $bottomMovers = BottomMover::where('page', 'home')
-                                  ->with('company')
-                                  ->orderBy('id')
-                                  ->take(6)
-                                  ->get();
-        
+            ->with('company')
+            ->orderBy('id')
+            ->take(6)
+            ->get();
+
         $blogs = \App\Models\Blog::with(['category', 'user'])
-                                ->latest()
-                                ->take(3)
-                                ->get();
-        
+            ->latest()
+            ->take(3)
+            ->get();
+
         return view('pages.home', compact('reviews', 'featuredCompanies', 'topMovers', 'bottomMovers', 'blogs'));
     }
 
     public function movers()
     {
         $companies = Company::where('is_active', true)
-                           ->with(['reviews', 'state'])
-                           ->withAvg('reviews', 'rating')
-                           ->withCount('reviews')
-                           ->paginate(12);
-        
+            ->with(['reviews', 'state'])
+            ->withAvg('reviews', 'rating')
+            ->withCount('reviews')
+            ->paginate(12);
+
         $topMovers = TopMover::where('page', 'movers')
-                            ->with('company')
-                            ->orderBy('id')
-                            ->get();
-        
+            ->with('company')
+            ->orderBy('id')
+            ->get();
+
         return view('pages.movers', compact('companies', 'topMovers'));
     }
 
@@ -79,16 +80,16 @@ class SiteController extends Controller
     public function blog()
     {
         $blogs = \App\Models\Blog::with(['category', 'user'])
-                                ->latest()
-                                ->paginate(9);
-        
+            ->latest()
+            ->paginate(9);
+
         $categories = \App\Models\BlogCategory::orderBy('name')
-                                            ->get();
-        
+            ->get();
+
         $recentBlogs = \App\Models\Blog::latest()
-                                     ->take(5)
-                                     ->get();
-        
+            ->take(5)
+            ->get();
+
         return view('pages.blog', compact('blogs', 'categories', 'recentBlogs'));
     }
 
@@ -110,50 +111,50 @@ class SiteController extends Controller
     public function reviewCreate()
     {
         $companies = Company::where('is_active', true)
-                           ->with(['reviews', 'state'])
-                           ->paginate(12);
+            ->with(['reviews', 'state'])
+            ->paginate(12);
         return view('pages.review_create', compact('companies'));
     }
 
     public function addListing()
     {
         $companies = Company::where('is_active', true)
-                           ->with('state')
-                           ->latest()
-                           ->paginate(12);
+            ->with('state')
+            ->latest()
+            ->paginate(12);
         $states = State::orderBy('name')->get();
         $countries = Country::orderBy('name')->get();
         return view('pages.add_listing', compact('companies', 'states', 'countries'));
     }
 
-    public function services()
-    {
-        $topMovers = TopMover::where('page', 'services')
-                            ->with('company')
-                            ->orderBy('id')
-                            ->take(6)
-                            ->get();
-        
-        $bottomMovers = BottomMover::where('page', 'services')
-                                  ->with('company')
-                                  ->orderBy('id')
-                                  ->take(6)
-                                  ->get();
-        
-        return view('pages.services', compact('topMovers', 'bottomMovers'));
-    }
+    // public function services()
+    // {
+    //     $topMovers = TopMover::where('page', 'services')
+    //                         ->with('company')
+    //                         ->orderBy('id')
+    //                         ->take(6)
+    //                         ->get();
+
+    //     $bottomMovers = BottomMover::where('page', 'services')
+    //                               ->with('company')
+    //                               ->orderBy('id')
+    //                               ->take(6)
+    //                               ->get();
+
+    //     return view('pages.services', compact('topMovers', 'bottomMovers'));
+    // }
 
     // Routes index and overviews
     public function routesIndex()
     {
         // Show only states that have at least one route defined (originating state)
-        $states = State::whereIn('id', function($q){
-                            $q->select('from_state_id')
-                              ->from('state_routes')
-                              ->whereNotNull('from_state_id');
-                        })
-                        ->orderBy('name')
-                        ->get();
+        $states = State::whereIn('id', function ($q) {
+            $q->select('from_state_id')
+                ->from('state_routes')
+                ->whereNotNull('from_state_id');
+        })
+            ->orderBy('name')
+            ->get();
         return view('pages.routes_index', compact('states'));
     }
 
@@ -161,19 +162,19 @@ class SiteController extends Controller
     {
         $stateName = str_replace('-', ' ', ucwords($state));
         $stateModel = State::where('name', 'LIKE', "%$stateName%")
-                          ->orWhere('code', strtoupper($state))
-                          ->firstOrFail();
+            ->orWhere('code', strtoupper($state))
+            ->firstOrFail();
 
-        $routes = StateRoute::with(['fromState','toState'])
-                            ->where('from_state_id', $stateModel->id)
-                            ->orderBy('miles')
-                            ->take(100)
-                            ->get();
+        $routes = StateRoute::with(['fromState', 'toState'])
+            ->where('from_state_id', $stateModel->id)
+            ->orderBy('miles')
+            ->take(100)
+            ->get();
 
         $cities = City::where('state_id', $stateModel->id)
-                      ->orderBy('name')
-                      ->take(200)
-                      ->get();
+            ->orderBy('name')
+            ->take(200)
+            ->get();
 
         return view('pages.routes_state', [
             'state' => $stateModel,
@@ -186,18 +187,20 @@ class SiteController extends Controller
     {
         $stateName = str_replace('-', ' ', ucwords($state));
         $stateModel = State::where('name', 'LIKE', "%$stateName%")
-                          ->orWhere('code', strtoupper($state))
-                          ->firstOrFail();
+            ->orWhere('code', strtoupper($state))
+            ->firstOrFail();
 
         $cities = City::where('state_id', $stateModel->id)
-                      ->orderBy('name')
-                      ->paginate(24);
+            ->orderBy('name')
+            ->paginate(24);
 
         // sample popular city routes originating in this state
-        $popularCityRoutes = CityRoute::with(['fromCity.state','toCity.state'])
-                                      ->whereHas('fromCity', function($q) use ($stateModel){ $q->where('state_id', $stateModel->id); })
-                                      ->take(50)
-                                      ->get();
+        $popularCityRoutes = CityRoute::with(['fromCity.state', 'toCity.state'])
+            ->whereHas('fromCity', function ($q) use ($stateModel) {
+                $q->where('state_id', $stateModel->id);
+            })
+            ->take(50)
+            ->get();
 
         return view('pages.routes_city', [
             'state' => $stateModel,
@@ -212,16 +215,16 @@ class SiteController extends Controller
         $toName = str_replace('-', ' ', ucwords($to));
 
         $fromState = State::where('name', 'LIKE', "%$fromName%")
-                          ->orWhere('code', strtoupper($from))
-                          ->firstOrFail();
+            ->orWhere('code', strtoupper($from))
+            ->firstOrFail();
         $toState = State::where('name', 'LIKE', "%$toName%")
-                        ->orWhere('code', strtoupper($to))
-                        ->firstOrFail();
+            ->orWhere('code', strtoupper($to))
+            ->firstOrFail();
 
-        $route = StateRoute::with(['fromState','toState'])
-                           ->where('from_state_id', $fromState->id)
-                           ->where('to_state_id', $toState->id)
-                           ->firstOrFail();
+        $route = StateRoute::with(['fromState', 'toState'])
+            ->where('from_state_id', $fromState->id)
+            ->where('to_state_id', $toState->id)
+            ->firstOrFail();
 
         return view('pages.state_route', compact('route'));
     }
@@ -233,20 +236,20 @@ class SiteController extends Controller
         $toName = str_replace('-', ' ', ucwords($toCity));
 
         $stateModel = State::where('name', 'LIKE', "%$stateName%")
-                          ->orWhere('code', strtoupper($state))
-                          ->firstOrFail();
+            ->orWhere('code', strtoupper($state))
+            ->firstOrFail();
 
         $from = City::where('name', 'LIKE', "%$fromName%")
-                    ->where('state_id', $stateModel->id)
-                    ->firstOrFail();
+            ->where('state_id', $stateModel->id)
+            ->firstOrFail();
         $to = City::where('name', 'LIKE', "%$toName%")
-                  ->where('state_id', $stateModel->id)
-                  ->firstOrFail();
+            ->where('state_id', $stateModel->id)
+            ->firstOrFail();
 
-        $route = CityRoute::with(['fromCity.state','toCity.state'])
-                          ->where('from_city_id', $from->id)
-                          ->where('to_city_id', $to->id)
-                          ->firstOrFail();
+        $route = CityRoute::with(['fromCity.state', 'toCity.state'])
+            ->where('from_city_id', $from->id)
+            ->where('to_city_id', $to->id)
+            ->firstOrFail();
 
         return view('pages.city_route', compact('route'));
     }
@@ -255,36 +258,36 @@ class SiteController extends Controller
     {
         // Convert slug to state name
         $stateName = str_replace('-', ' ', ucwords($state));
-        
+
         // Find state by name or slug
         $stateModel = State::where('name', 'LIKE', "%$stateName%")
-                          ->orWhere('code', strtoupper($state))
-                          ->first();
-        
+            ->orWhere('code', strtoupper($state))
+            ->first();
+
         if (!$stateModel) {
             abort(404);
         }
-        
+
         $stateName = $stateModel->name;
-        
+
         // Get companies in this state
         $companies = Company::where('state_id', $stateModel->id)
-                           ->where('is_active', true)
-                           ->withCount('reviews')
-                           ->paginate(12);
-        
+            ->where('is_active', true)
+            ->withCount('reviews')
+            ->paginate(12);
+
         // Get top movers for this state
         $topMovers = TopMover::where('page', 'LIKE', "%$stateName%")
-                             ->with('company')
-                             ->take(3)
-                             ->get();
-        
+            ->with('company')
+            ->take(3)
+            ->get();
+
         // Get bottom movers for this state
         $bottomMovers = BottomMover::where('page', 'LIKE', "%$stateName%")
-                                   ->with('company')
-                                   ->take(2)
-                                   ->get();
-        
+            ->with('company')
+            ->take(2)
+            ->get();
+
         return view('pages.state_movers', compact('stateName', 'companies', 'topMovers', 'bottomMovers'));
     }
 
@@ -293,36 +296,36 @@ class SiteController extends Controller
         // Convert slugs to names
         $stateName = str_replace('-', ' ', ucwords($state));
         $cityName = str_replace('-', ' ', ucwords($city));
-        
+
         // Find state
         $stateModel = State::where('name', 'LIKE', "%$stateName%")
-                          ->orWhere('code', strtoupper($state))
-                          ->first();
-        
+            ->orWhere('code', strtoupper($state))
+            ->first();
+
         if (!$stateModel) {
             abort(404);
         }
-        
+
         // Find city
         $cityModel = City::where('name', 'LIKE', "%$cityName%")
-                        ->where('state_id', $stateModel->id)
-                        ->first();
-        
+            ->where('state_id', $stateModel->id)
+            ->first();
+
         if (!$cityModel) {
             abort(404);
         }
-        
+
         $stateName = $stateModel->name;
         $cityName = $cityModel->name;
         $cityZip = $cityModel->zip_code;
-        
+
         // Get companies in this city
         $companies = Company::where('city', 'LIKE', "%$cityName%")
-                           ->where('state_id', $stateModel->id)
-                           ->where('is_active', true)
-                           ->withCount('reviews')
-                           ->paginate(12);
-        
+            ->where('state_id', $stateModel->id)
+            ->where('is_active', true)
+            ->withCount('reviews')
+            ->paginate(12);
+
         return view('pages.city_movers', compact('stateName', 'cityName', 'cityZip', 'companies'));
     }
 
@@ -332,17 +335,17 @@ class SiteController extends Controller
         if (!$page) {
             abort(404);
         }
-        
-                $topMovers = TopMover::where('page', $page->slug)
-                              ->with('company')
-                              ->orderBy('id')
-                              ->get();
-        
+
+        $topMovers = TopMover::where('page', $page->slug)
+            ->with('company')
+            ->orderBy('id')
+            ->get();
+
         $bottomMovers = BottomMover::where('page', $page->slug)
-                                    ->with('company')
-                                    ->orderBy('position')
-                                    ->get();
-        
+            ->with('company')
+            ->orderBy('position')
+            ->get();
+
         return view('pages.best_moving_page', compact('page', 'topMovers', 'bottomMovers'));
     }
 
@@ -364,11 +367,11 @@ class SiteController extends Controller
         if (!$category) {
             abort(404);
         }
-        
+
         $items = ChecklistItem::where('checklist_category_id', $category->id)
-                              ->orderBy('order')
-                              ->get();
-        
+            ->orderBy('order')
+            ->get();
+
         return view('pages.checklist', compact('category', 'items'));
     }
 
@@ -376,39 +379,39 @@ class SiteController extends Controller
     {
         $query = $request->get('q');
         $companies = Company::where('name', 'LIKE', "%$query%")
-                           ->orWhere('description', 'LIKE', "%$query%")
-                           ->where('is_active', true)
-                           ->paginate(12);
-        
+            ->orWhere('description', 'LIKE', "%$query%")
+            ->where('is_active', true)
+            ->paginate(12);
+
         return view('pages.search_results', compact('companies', 'query'));
     }
 
     public function companyProfile($slug)
     {
         $company = Company::where('slug', $slug)
-                         ->where('is_active', true)
-                         ->with(['reviews' => function($query) {
-                             $query->latest();
-                         }, 'state', 'country'])
-                         ->firstOrFail();
-        
+            ->where('is_active', true)
+            ->with(['reviews' => function ($query) {
+                $query->latest();
+            }, 'state', 'country'])
+            ->firstOrFail();
+
         return view('pages.company_profile', compact('company'));
     }
 
     public function reviewForm($slug)
     {
         $company = Company::where('slug', $slug)
-                         ->where('is_active', true)
-                         ->firstOrFail();
-        
+            ->where('is_active', true)
+            ->firstOrFail();
+
         return view('pages.review_form', compact('company'));
     }
 
     public function reviewStore(Request $request, $slug)
     {
         $company = Company::where('slug', $slug)
-                         ->where('is_active', true)
-                         ->firstOrFail();
+            ->where('is_active', true)
+            ->firstOrFail();
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -428,44 +431,44 @@ class SiteController extends Controller
         Review::create($validated);
 
         return redirect()->route('front.review.create')
-                        ->with('success', 'Thank you! Your review has been submitted and is pending approval.');
+            ->with('success', 'Thank you! Your review has been submitted and is pending approval.');
     }
 
     public function blogDetail($slug)
     {
         $blog = \App\Models\Blog::with(['category', 'user'])
-                               ->where('slug', $slug)
-                               ->firstOrFail();
-        
+            ->where('slug', $slug)
+            ->firstOrFail();
+
         $relatedBlogs = \App\Models\Blog::where('id', '!=', $blog->id)
-                                       ->where('blog_category_id', $blog->blog_category_id)
-                                       ->take(3)
-                                       ->get();
-        
+            ->where('category_id', $blog->category_id)
+            ->take(3)
+            ->get();
+
         return view('pages.blog_detail', compact('blog', 'relatedBlogs'));
     }
 
     public function blogCategory($slug)
     {
         $category = \App\Models\BlogCategory::where('slug', $slug)->firstOrFail();
-        
+
         $blogs = \App\Models\Blog::with(['category', 'user'])
-                                ->where('category_id', $category->id)
-                                ->latest()
-                                ->paginate(9);
-        
+            ->where('category_id', $category->id)
+            ->latest()
+            ->paginate(9);
+
         $categories = \App\Models\BlogCategory::orderBy('name')->get();
         $recentBlogs = \App\Models\Blog::latest()->take(5)->get();
-        
+
         return view('pages.blog', compact('blogs', 'category', 'categories', 'recentBlogs'));
     }
 
     public function addBusiness()
     {
         $companies = Company::where('is_active', true)
-                           ->with('state')
-                           ->latest()
-                           ->paginate(12);
+            ->with('state')
+            ->latest()
+            ->paginate(12);
         $states = State::orderBy('name')->get();
         $countries = Country::orderBy('name')->get();
         return view('pages.add_listing', compact('companies', 'states', 'countries'));
@@ -498,9 +501,10 @@ class SiteController extends Controller
         Company::create($data);
 
         return redirect()->route('front.add.listing')
-                         ->with('success', 'Thank you! Your company has been submitted and is pending review.');
+            ->with('success', 'Thank you! Your company has been submitted and is pending review.');
     }
-    public function checklist(){
+    public function checklist()
+    {
         $categories = ChecklistCategory::orderBy('name')->get();
         $items = ChecklistItem::all();
         return view('pages.checklist', compact('categories', 'items'));

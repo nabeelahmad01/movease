@@ -27,19 +27,19 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="origin" class="form-label">Moving From</label>
-                                <input type="text" class="form-control" id="origin" placeholder="Enter city or ZIP code">
+                                <input type="text" class="form-control zipfrom" id="origin" placeholder="Enter city or ZIP code">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="destination" class="form-label">Moving To</label>
-                                <input type="text" class="form-control" id="destination" placeholder="Enter city or ZIP code">
+                                <input type="text" class="form-control zipto" id="destination" placeholder="Enter city or ZIP code">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="move_date" class="form-label">Move Date</label>
-                                <input type="date" class="form-control" id="move_date">
+                                <input type="date" class="form-control movedate" id="move_date">
                             </div>
                         </div>
                         <div class="col-md-6">
