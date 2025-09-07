@@ -41,3 +41,6 @@ Route::prefix('admin')->group(function(){
         Route::get('/quotes', [QuoteController::class, 'index'])->name('admin.quotes.index');
     });
 });
+
+
+Route::view('test', 'dashboards.layouts.app');
