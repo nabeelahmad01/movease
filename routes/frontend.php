@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\ContactMoverController;
 use App\Http\Controllers\Frontend\SiteController;
 use App\Http\Controllers\Backend\QuoteController as AdminQuoteController;
 use App\Models\QuoteRequest;
@@ -37,6 +38,10 @@ Route::get('/routes/state/{id}', [SiteController::class,'stateRouteShow'])
     ->name('front.state.route');
 Route::get('/checklist', [SiteController::class,'checklist'])->name('front.checklist');
 Route::get('/checklist/{slug}', [SiteController::class,'checklistCategory'])->name('front.checklist.category');
+
+// Contact Mover (per-company contact page)
+Route::get('/company/{slug}/contact-mover', [ContactMoverController::class, 'show'])->name('front.contact.mover.show');
+Route::post('/company/{slug}/contact-mover', [ContactMoverController::class, 'store'])->name('front.contact.mover.store');
 
 // Submit Quote Request
 Route::post('/get-quote', function (Request $request) {

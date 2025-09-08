@@ -267,7 +267,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="action-buttons text-center">
-                                <a href="/get-quote?company={{ $company->id }}" class="btn btn-primary btn-lg w-100 mb-2">
+                                <a href="{{ route('front.contact.mover.show', $company->slug) }}" class="btn btn-primary btn-lg w-100 mb-2">
                                     <i class="fas fa-quote-left me-2"></i>Get Free Quote
                                 </a>
                                 @if ($company->phone)
@@ -665,7 +665,7 @@
                     <p class="mb-4">Get free quotes from {{ $company->name }} and other top-rated interstate movers.
                         Compare prices, services, and reviews to make the best choice for your move.</p>
                     <div class="d-flex flex-wrap justify-content-center gap-3">
-                        <a href="/get-quote?company={{ $company->id }}" class="btn btn-primary btn-lg">
+                        <a href="{{ route('front.contact.mover.show', $company->slug) }}" class="btn btn-primary btn-lg">
                             <i class="fas fa-quote-left me-2"></i>Get Free Quotes
                         </a>
                         <a href="/get-quote" class="btn btn-outline-primary btn-lg">

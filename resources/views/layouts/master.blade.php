@@ -156,32 +156,38 @@ document.querySelectorAll('.feature-card, .review-card').forEach(card => {
 const form = document.getElementById('quoteForm');
 if(form){
   form.addEventListener('submit', function(e) {
+      // Only intercept when quick-redirect button exists (home/hero mini form)
+      const btn = document.getElementById('getQuoteBtn');
+      if (!btn) {
+        // No special redirect button present; allow normal submission (e.g., Get Quote page)
+        return;
+      }
+
       e.preventDefault();
-      
+
       const zipFrom = form.querySelector('.zipfrom');
       const zipTo   = form.querySelector('.zipto');
       const moveDate = form.querySelector('.movedate');
       let isValid = true;
-      
-      [zipFrom, zipTo].forEach(input => input.classList.remove('is-invalid','is-valid'));
-      
-      if (!zipFrom.value.trim()) { zipFrom.classList.add('is-invalid'); isValid = false; } 
+
+      [zipFrom, zipTo].forEach(input => input && input.classList.remove('is-invalid','is-valid'));
+
+      if (!zipFrom || !zipFrom.value.trim()) { if (zipFrom) zipFrom.classList.add('is-invalid'); isValid = false; } 
       else { zipFrom.classList.add('is-valid'); }
-      
-      if (!zipTo.value.trim()) { zipTo.classList.add('is-invalid'); isValid = false; } 
+
+      if (!zipTo || !zipTo.value.trim()) { if (zipTo) zipTo.classList.add('is-invalid'); isValid = false; } 
       else { zipTo.classList.add('is-valid'); }
-      
+
       if (!isValid) { alert('Please fill in all required fields'); return; }
-      
-      const btn = document.getElementById('getQuoteBtn');
+
       btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Getting Quotes...';
       btn.disabled = true;
-      
+
       setTimeout(() => {
           const params = new URLSearchParams({
-              zip_from: zipFrom.value,
-              zip_to: zipTo.value,
-              movedate: moveDate.value
+              zip_from: zipFrom ? zipFrom.value : '',
+              zip_to: zipTo ? zipTo.value : '',
+              movedate: moveDate ? moveDate.value : ''
           });
           window.location.href = "/get-quote?" + params.toString();
       }, 1500);

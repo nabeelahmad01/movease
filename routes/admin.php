@@ -13,6 +13,7 @@ use App\Http\Controllers\TopMoverController;
 use App\Http\Controllers\BottomMoverController;
 use App\Http\Controllers\BestMovingPageController;
 use App\Http\Controllers\Backend\QuoteController;
+use App\Http\Controllers\Backend\ContactMoverLeadController;
 
 Route::prefix('admin')->group(function(){
     Route::get('/login', [AdminController::class, 'showLogin'])->name('admin.login');
@@ -39,6 +40,7 @@ Route::prefix('admin')->group(function(){
         Route::resource('bottom-movers', BottomMoverController::class)->names('admin.bottom-movers');
         Route::resource('best-moving-pages', BestMovingPageController::class)->names('admin.best-moving-pages');
         Route::get('/quotes', [QuoteController::class, 'index'])->name('admin.quotes.index');
+        Route::get('/contact-leads', [ContactMoverLeadController::class, 'index'])->name('admin.contact-leads.index');
     });
 });
 

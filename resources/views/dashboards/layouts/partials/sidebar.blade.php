@@ -344,6 +344,26 @@
                         </div>
                     </div>
                 </div>
+
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <i class="bi bi-person-lines-fill me-2"></i>
+                        </span>
+                        <span class="menu-title">Contact Leads</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.contact-leads.index') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-list me-2"></i>
+                                </span>
+                                <span class="menu-title">List</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
