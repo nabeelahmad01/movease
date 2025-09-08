@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','Edit State Route | Admin')
-@section('page_title','State To State Route — Edit')
+<!-- @section('page_title','State To State Route — Edit') -->
 @section('content')
 <form method="POST" action="{{ route('admin.state-routes.update',$route) }}" class="card p-3 shadow-sm">
   @csrf @method('PUT')

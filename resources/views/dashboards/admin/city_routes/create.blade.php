@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','City Route | Create')
-@section('page_title','Moving Route — Create')
+<!-- @section('page_title','Moving Route — Create') -->
 @section('content')
 <form method="POST" action="{{ route('admin.city-routes.store') }}" class="card p-3 shadow-sm">
   @csrf

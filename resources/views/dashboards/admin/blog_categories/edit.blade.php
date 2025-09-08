@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','Edit Blog Category | Admin')
-@section('page_title','Blog Categories — Edit')
+<!-- @section('page_title','Blog Categories — Edit') -->
 @section('content')
 <div class="container-fluid">
   <form method="POST" action="{{ route('admin.blog-categories.update',$category) }}" class="card shadow-sm p-3">

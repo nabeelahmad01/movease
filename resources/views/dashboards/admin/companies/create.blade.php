@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('dashboards.layouts.app')
 @section('title','Create Company | Admin')
 @section('content')
 <div class="container py-4">

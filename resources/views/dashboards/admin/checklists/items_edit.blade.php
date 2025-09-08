@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','Checklist Item | Edit')
-@section('page_title','Checklist Item — Edit')
+<!-- @section('page_title','Checklist Item — Edit') -->
 @section('content')
 <form method="POST" action="{{ route('admin.checklist-items.update',$item) }}" class="card p-3 shadow-sm">
   @csrf @method('PUT')

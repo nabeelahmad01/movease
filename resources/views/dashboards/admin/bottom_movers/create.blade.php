@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','Bottom Movers | Create')
-@section('page_title','Bottom Movers — Create')
+<!-- @section('page_title','Bottom Movers — Create') -->
 @section('content')
 <form method="POST" action="{{ route('admin.bottom-movers.store') }}" class="card p-3 shadow-sm">
   @csrf

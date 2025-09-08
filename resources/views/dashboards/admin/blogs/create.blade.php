@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','Create Blog | Admin')
-@section('page_title','Blogs — Create')
+<!-- @section('page_title','Blogs — Create') -->
 @section('content')
 <div class="container-fluid">
   <form method="POST" action="{{ route('admin.blogs.store') }}" enctype="multipart/form-data" class="card shadow-sm p-3">

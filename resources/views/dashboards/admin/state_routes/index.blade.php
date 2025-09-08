@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','State Routes | Admin')
-@section('page_title','State To State Route')
+<!-- @section('page_title','State To State Route') -->
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
   <h3>State To State Route</h3>

@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','Bottom Movers | Edit')
-@section('page_title','Bottom Movers — Edit')
+<!-- @section('page_title','Bottom Movers — Edit') -->
 @section('content')
 <form method="POST" action="{{ route('admin.bottom-movers.update',$record) }}" class="card p-3 shadow-sm">
   @csrf @method('PUT')

@@ -22,12 +22,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <a href="{{ route('admin.dashboard') }}" class="menu-link">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-gift fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                                <span class="path3"></span>
-                                <span class="path4"></span>
-                            </i>
+                        <i class="bi bi-speedometer2 me-2"></i>
                         </span>
                         <span class="menu-title">Dashboard</span>
                     </a>
@@ -36,44 +31,315 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-gift fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                                <span class="path3"></span>
-                                <span class="path4"></span>
-                            </i>
+                            <i class="bi bi-buildings me-2"></i>
                         </span>
-                        <span class="menu-title">Pages</span>
+                        <span class="menu-title">Companies</span>
                         <span class="menu-arrow"></span>
                     </span>
                     <div class="menu-sub menu-sub-accordion">
-                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                            <span class="menu-link">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Social</span>
-                                <span class="menu-arrow"></span>
-                            </span>
-
-                            <div class="menu-sub menu-sub-accordion">
-                                <div class="menu-item">
-                                    <a class="menu-link" href="#">
-                                        <span class="menu-bullet">
-                                            <span class="bullet bullet-dot"></span>
-                                        </span>
-                                        <span class="menu-title">Feeds</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="menu-item">
-                            <a class="menu-link" href="#">
+                            <a class="menu-link" href="{{ route('admin.companies.index') }}">
                                 <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
+                                    <i class="bi bi-list me-2"></i>
                                 </span>
-                                <span class="menu-title">About</span>
+                                <span class="menu-title">List</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.companies.create') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-plus me-2"></i>
+                                </span>
+                                <span class="menu-title">Create</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                            <i class="bi bi-tags me-2"></i>
+                        </span>
+                        <span class="menu-title">Blog Categories</span>
+                        <span class="menu-arrow"></span>
+                    </span>     
+                    <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.blog-categories.index') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-list me-2"></i>
+                                </span>
+                                <span class="menu-title">List</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.blog-categories.create') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-plus me-2"></i>
+                                </span>
+                                <span class="menu-title">Create</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                           <i class="bi bi-journal-text me-2"></i>
+                        </span>
+                        <span class="menu-title">Blogs</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.blogs.index') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-list me-2"></i>
+                                </span>
+                                <span class="menu-title">List</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.blogs.create') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-plus me-2"></i>
+                                </span>
+                                <span class="menu-title">Create</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <i class="bi bi-star-half me-2"></i>
+                        </span>
+                        <span class="menu-title">Reviews</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.reviews.index') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-list me-2"></i>
+                                </span>
+                                <span class="menu-title">List</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.reviews.create') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-plus me-2"></i>
+                                </span>
+                                <span class="menu-title">Create</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <i class="bi bi-signpost-2 me-2"></i>
+                        </span>
+                        <span class="menu-title">State Routes</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.state-routes.index') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-list me-2"></i>
+                                </span>
+                                <span class="menu-title">List</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.state-routes.create') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-plus me-2"></i>
+                                </span>
+                                <span class="menu-title">Create</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <i class="bi bi-geo-alt me-2"></i>
+                        </span>
+                        <span class="menu-title">City Routes</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.city-routes.index') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-list me-2"></i>
+                                </span>
+                                <span class="menu-title">List</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.city-routes.create') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-plus me-2"></i>
+                                </span>
+                                <span class="menu-title">Create</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <i class="bi bi-list-check me-2"></i>
+                        </span>
+                        <span class="menu-title">Checklist Categories</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.checklist-categories.index') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-list me-2"></i>
+                                </span>
+                                <span class="menu-title">List</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.checklist-categories.create') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-plus me-2"></i>
+                                </span>
+                                <span class="menu-title">Create</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <i class="bi bi-ui-checks-grid me-2"></i>
+                        </span>
+                        <span class="menu-title">Checklist Items</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.checklist-items.index') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-list me-2"></i>
+                                </span>
+                                <span class="menu-title">List</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.checklist-items.create') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-plus me-2"></i>
+                                </span>
+                                <span class="menu-title">Create</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <i class="bi bi-award me-2"></i>
+                        </span>
+                        <span class="menu-title">Top Movers</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.top-movers.index') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-list me-2"></i>
+                                </span>
+                                <span class="menu-title">List</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.top-movers.create') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-plus me-2"></i>
+                                </span>
+                                <span class="menu-title">Create</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <i class="bi bi-arrow-down-square me-2"></i>
+                        </span>
+                        <span class="menu-title">Bottom Movers</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.bottom-movers.index') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-list me-2"></i>
+                                </span>
+                                <span class="menu-title">List</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.bottom-movers.create') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-plus me-2"></i>
+                                </span>
+                                <span class="menu-title">Create</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <i class="bi bi-file-earmark-text me-2"></i>
+                        </span>
+                        <span class="menu-title">Best Moving Page</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.best-moving-pages.index') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-list me-2"></i>
+                                </span>
+                                <span class="menu-title">List</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.best-moving-pages.create') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-plus me-2"></i>
+                                </span>
+                                <span class="menu-title">Create</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <i class="bi bi-quote me-2"></i>
+                        </span>
+                        <span class="menu-title">Quote Requests</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.quotes.index') }}">
+                                <span class="menu-bullet">
+                                    <i class="bi bi-list me-2"></i>
+                                </span>
+                                <span class="menu-title">List</span>
                             </a>
                         </div>
                     </div>

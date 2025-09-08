@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','Best Moving Page | Create')
-@section('page_title','Best Moving Page — Create')
+<!-- @section('page_title','Best Moving Page — Create') -->
 @section('content')
 <form method="POST" action="{{ route('admin.best-moving-pages.store') }}" class="card p-3 shadow-sm">
   @csrf

@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','Blog Categories | Admin')
-@section('page_title','Blog Categories')
+<!-- @section('page_title','Blog Categories') -->
 @section('content')
 <div class="container-fluid">
   <div class="d-flex justify-content-between align-items-center mb-3">

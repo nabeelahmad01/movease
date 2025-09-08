@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title', 'Admin - Quotes | MoveEase')
 @section('page_title','Quotes')
 @section('content')

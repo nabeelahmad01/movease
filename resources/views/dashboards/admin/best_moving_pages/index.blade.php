@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','Best Moving Pages | Admin')
-@section('page_title','Best Moving Pages')
+<!-- @section('page_title','Best Moving Pages') -->
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
   <h3>Best Moving Pages</h3>

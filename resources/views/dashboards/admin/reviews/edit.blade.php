@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','Edit Review | Admin')
-@section('page_title','Reviews — Edit')
+<!-- @section('page_title','Reviews — Edit') -->
 @section('content')
 <div class="container-fluid">
   <form method="POST" action="{{ route('admin.reviews.update',$review) }}" enctype="multipart/form-data" class="card shadow-sm p-3">

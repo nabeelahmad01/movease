@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','Create State Route | Admin')
-@section('page_title','State To State Route — Create')
+<!-- @section('page_title','State To State Route — Create') -->
 @section('content')
 <form method="POST" action="{{ route('admin.state-routes.store') }}" class="card p-3 shadow-sm">
   @csrf

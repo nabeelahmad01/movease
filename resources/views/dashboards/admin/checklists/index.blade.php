@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','Checklist Categories | Admin')
-@section('page_title','Checklist Categories')
+<!-- @section('page_title','Checklist Categories') -->
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
   <h3>Checklist Categories</h3>

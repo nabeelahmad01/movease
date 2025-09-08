@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('dashboards.layouts.app')
 @section('title','Checklist Item | Create')
-@section('page_title','Checklist Item — Create')
+<!-- @section('page_title','Checklist Item — Create') -->
 @section('content')
 <form method="POST" action="{{ route('admin.checklist-items.store') }}" class="card p-3 shadow-sm">
   @csrf
