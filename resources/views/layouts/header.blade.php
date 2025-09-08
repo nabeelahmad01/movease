@@ -72,7 +72,7 @@
                         href="{{ route('front.contact') }}">Contact</a>
                 </li>
             </ul>
-            <div class="d-flex gap-2 ms-3">
+            <div class="d-flex align-items-center gap-2 ms-3">
                 <a href="{{ route('front.add-business') }}" class="btn btn-outline-primary btn-sm">Add Listing</a>
                 <a href="/admin/login" class="btn btn-primary btn-sm">Login</a>
             </div>

@@ -29517,7 +29517,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   align-items: center;
   padding: 0;
   flex: 0 0 100%;
-  padding: 0.65rem 1rem;
+  padding: 0.85rem 1rem;
   transition: none;
   outline: none !important;
 }
@@ -31546,6 +31546,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .menu-icon-gray-400 .menu-item .menu-link .menu-icon .svg-icon,
 .menu-icon-gray-400 .menu-item .menu-link .menu-icon i {
   color: var(--bs-text-gray-400);
+  font-size: 22px;
 }
 
 .menu-bullet-gray-400 .menu-item .menu-link .menu-bullet .bullet {
@@ -31678,6 +31679,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 .menu-title-gray-600 .menu-item .menu-link .menu-title {
   color: var(--bs-text-gray-600);
+  font-size: 16px;
 }
 
 .menu-icon-gray-600 .menu-item .menu-link .menu-icon,
@@ -47202,10 +47204,12 @@ label.rating-label:hover ~ .rating-label > i, label.rating-label:hover ~ .rating
 
 i.bi, i[class^=fonticon-], i[class*=" fonticon-"], i[class^=fa-], i[class*=" fa-"], i[class^=la-], i[class*=" la-"] {
   line-height: 1;
-  font-size: 1rem;
+  font-size: 24px;
   color: var(--bs-text-muted);
 }
-
+.value.fw-bold {
+  font-size: 22px;
+}
 a {
   transition: color 0.2s ease;
 }

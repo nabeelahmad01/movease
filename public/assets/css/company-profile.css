@@ -1,13 +1,4 @@
 /* Company Profile Page Styles */
-:root {
-    --primary-color: #2c3e50;
-    --secondary-color: #e74c3c;
-    --accent-color: #f39c12;
-    --light-bg: #ecf0f1;
-    --dark-text: #2c3e50;
-    --light-text: #7f8c8d;
-}
-
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-weight: 600;
