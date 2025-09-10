@@ -115,3 +115,75 @@
     padding: 10px;
     border-radius: 10px;
 }
+.mover-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+}
+
+.mover-card h4 {
+    color: #257180;
+}
+
+.mover-card button {
+    background: #257180;
+    border: none;
+}
+
+.mover-card button:hover {
+    background: #1c5c66;
+}
+
+.toggle-details {
+    color: #257180;
+    cursor: pointer;
+}
+
+.toggle-icon {
+    font-size: 1.2rem;
+    color: #257180;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.toggle-icon.rotate {
+    transform: rotate(180deg);
+}
+
+.corner-ribbon {
+    position: absolute;
+    top: -3px;
+    /* card ke upar uthaya */
+    left: 20px;
+    /* ya right:20px; kar sakte ho */
+    background: #f15a24;
+    /* orange */
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 12px;
+    text-align: center;
+    z-index: 2;
+
+    /* pointed tail shape */
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+
+    /* thoda shadow dene ke liye */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.packing-calculator .card {
+    background: #fff;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.12);
+    border: 2px solid #25718021;
+}
+
+.packing-calculator button {
+    background: #257180;
+    border: none;
+}
+
+.packing-calculator button:hover {
+    background: #1d5d68;
+}

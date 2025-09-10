@@ -235,8 +235,13 @@
                             </div>
                             <div class="rating-large">
                                 @for ($i = 1; $i <= 5; $i++)
-                                    <i class="fas fa-star{{ $i <= $company->averageRating() ? '' : '-o' }}"></i>
+                                    @if ($i <= $company->averageRating())
+                                        <i class="fas fa-star text-warning"></i> <!-- solid star -->
+                                    @else
+                                        <i class="far fa-star text-warning"></i> <!-- outline star -->
+                                    @endif
                                 @endfor
+
                             </div>
                             <div class="rating-count mt-2">
                                 {{ number_format($company->averageRating(), 1) }}/5 ({{ $company->reviews()->count() }}
@@ -267,7 +272,8 @@
                         </div>
                         <div class="col-md-3">
                             <div class="action-buttons text-center">
-                                <a href="{{ route('front.contact.mover.show', $company->slug) }}" class="btn btn-primary btn-lg w-100 mb-2">
+                                <a href="{{ route('front.contact.mover.show', $company->slug) }}"
+                                    class="btn btn-primary btn-lg w-100 mb-2">
                                     <i class="fas fa-quote-left me-2"></i>Get Free Quote
                                 </a>
                                 @if ($company->phone)

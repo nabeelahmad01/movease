@@ -143,8 +143,7 @@
                 @if ($bottomMovers->count())
                     <h3 class="mt-5 mb-3">More Movers</h3>
                     <div class="row g-3">
-                        @foreach ($bottomMovers as $bm)
-                            <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                                 <div class="card h-100 shadow-sm">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -172,9 +171,104 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            </div> --}}
                     </div>
+                    @foreach ($bottomMovers as $bm)
+                        <div class="card mb-4 rounded-3 position-relative mover-card">
+                            <!-- Corner Ribbon Badge -->
+                            <div class="corner-ribbon">{{ $bm->position }}</div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- Left Column -->
+                                    <div class="col-md-4 border-end text-center">
+                                        <img src="https://mygoodmovers.com/public/companies/logo/distance-movers.jpg"
+                                            alt="United Van Lines" class="mb-3" style="max-height:50px;">
+                                        <h5 class="fw-bold" style="color: #122b2e;">{{ $bm->company->name }}</h5>
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $bm->company->averageRating())
+                                                <i class="fas fa-star text-warning"></i>
+                                            @else
+                                                <i class="far fa-star text-warning"></i>
+                                            @endif
+                                        @endfor
+                                        <p class="mb-1 text-success fw-semibold">
+                                            {{ number_format($bm->company->averageRating(), 1) }}/5
+                                            ({{ $bm->company->reviews()->count() }}
+                                            reviews)
+                                        </p>
+                                        <button class="btn w-100 text-white fw-semibold" style="background:#257180;">Get
+                                            Started</button>
+
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <a class="text-decoration-none fw-semibold toggle-details"
+                                                data-bs-toggle="collapse" href="#moverDetails" role="button"
+                                                aria-expanded="false" aria-controls="moverDetails">
+                                                Show details
+                                            </a>
+                                            <i class="bi bi-chevron-down toggle-icon ms-2" data-bs-toggle="collapse"
+                                                href="#moverDetails"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right Column -->
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3">
+                                                <p class="fw-bold mb-1">Services offered</p>
+                                                <p class="small text-muted">Packing, car shipping, unpacking, storage and
+                                                    debris removal.</p>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <p class="fw-bold mb-1">Deposit required?</p>
+                                                <p class="small text-muted">{{ $bm->deposit_required }}</p>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <p class="fw-bold mb-1">Customer ratings</p>
+                                                <p class="small text-muted">Better than most<br>
+                                                    <span class="small">Based on BBB rating and complaints per 100
+                                                        vehicles</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Collapsible Content -->
+                                <div class="collapse mt-3" id="moverDetails">
+                                    <div class="mb-3">
+                                        <h6 class="fw-bold">Key facts</h6>
+                                        <p class="small text-muted mb-0">
+                                            United Van Lines combines virtual walkthroughs, a digital move portal, and
+                                            full-service options.
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold text-success">Pros</h6>
+                                            <ul class="list-unstyled small">
+                                                <li>✅ Does virtual walkthroughs for quotes</li>
+                                                <li>✅ Full-service mover</li>
+                                                <li>✅ Has online move portal</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold text-danger">Cons</h6>
+                                            <ul class="list-unstyled small">
+                                                <li>❌ Only offers day-certain deliveries with Snapmoves Priority service
+                                                </li>
+                                                <li>❌ Website’s chatbot is relatively limited</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    {{-- @if ($bm->content)
+                                            <div class="mt-2">{!! $bm->content !!}</div>
+                                        @endif --}}
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
                 @endif
 
                 @if ($page->lower_content)
@@ -183,4 +277,19 @@
             </div>
         </div>
     </section>
+    <script>
+        const toggleLink = document.querySelector('.toggle-details');
+        const toggleIcon = document.querySelector('.toggle-icon');
+        const collapseEl = document.getElementById('moverDetails');
+
+        collapseEl.addEventListener('show.bs.collapse', () => {
+            toggleIcon.classList.add('rotate');
+            toggleLink.innerText = "Close details";
+        });
+
+        collapseEl.addEventListener('hide.bs.collapse', () => {
+            toggleIcon.classList.remove('rotate');
+            toggleLink.innerText = "Show details";
+        });
+    </script>
 @endsection
