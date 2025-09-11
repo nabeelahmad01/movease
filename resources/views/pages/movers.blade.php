@@ -21,45 +21,16 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <form class="search-form">
+                    <form class="search-form" method="GET" action="{{ route('front.movers') }}">
                         <h3 class="text-center">Search Moving Companies</h3>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="origin" class="form-label">Moving From</label>
-                                    <input type="text" class="form-control zipfrom" id="origin"
-                                        placeholder="Enter city or ZIP code">
-                                </div>
+                        <div class="row g-3 align-items-end">
+                            <div class="col-md-10">
+                                <label for="q" class="form-label">Search by company, city or state</label>
+                                <input type="text" name="q" id="q" class="form-control" placeholder="e.g. Allied, Miami, Texas" value="{{ request('q') }}">
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="destination" class="form-label">Moving To</label>
-                                    <input type="text" class="form-control zipto" id="destination"
-                                        placeholder="Enter city or ZIP code">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="move_date" class="form-label">Move Date</label>
-                                    <input type="date" class="form-control movedate" id="move_date">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="home_size" class="form-label">Home Size</label>
-                                    <select class="form-control" id="home_size">
-                                        <option value="">Select home size</option>
-                                        <option value="studio">Studio</option>
-                                        <option value="1-bedroom">1 Bedroom</option>
-                                        <option value="2-bedroom">2 Bedroom</option>
-                                        <option value="3-bedroom">3 Bedroom</option>
-                                        <option value="4-bedroom">4+ Bedroom</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-primary btn-lg px-5">
-                                    <i class="fas fa-search me-2"></i>Search Movers
+                            <div class="col-md-2 text-md-end text-center">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-search me-2"></i>Search
                                 </button>
                             </div>
                         </div>
@@ -142,28 +113,23 @@
                 <div class="col-lg-9">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2>Available Moving Companies</h2>
-                        <div class="results-count text-muted">
-                            Showing {{ $companies->count() ?? 12 }} of {{ $companies->total() ?? 156 }} companies
-                        </div>
                     </div>
 
                     <div class="movers-grid">
                         @forelse($companies ?? [] as $company)
                             <div class="mover-card">
                                 <div class="mover-header">
-                                    <div class="mover-logo">{{ substr($company->name ?? 'MC', 0, 2) }}</div>
+                                    <div class="mover-logo">{{ strtoupper(substr($company->name ?? 'MC', 0, 2)) }}</div>
                                     <h4 class="mover-name">{{ $company->name ?? 'Professional Moving Company' }}</h4>
                                     <div class="mover-rating">
                                         <div class="star-rating">
+                                            @php $avg = (float)($company->reviews_avg_rating ?? 0); @endphp
                                             @for ($i = 1; $i <= 5; $i++)
-                                                <i
-                                                    class="fas fa-star{{ $i <= ($company->average_rating ?? 4.5) ? '' : '-o' }}"></i>
+                                                <i class="fas fa-star{{ $i <= round($avg) ? '' : '-o' }}"></i>
                                             @endfor
                                         </div>
-                                        <span
-                                            class="rating-score">{{ number_format($company->average_rating ?? 4.5, 1) }}</span>
-                                        <span class="rating-count">({{ $company->reviews_count ?? rand(50, 200) }}
-                                            reviews)</span>
+                                        <span class="rating-score">{{ number_format($avg, 1) }}</span>
+                                        <span class="rating-count">({{ $company->reviews_count ?? 0 }} reviews)</span>
                                     </div>
                                     <div class="mover-badges">
                                         @if ($company->is_verified ?? true)
@@ -190,10 +156,16 @@
                                     </div>
                                     <div class="mover-location">
                                         <i class="fas fa-map-marker-alt"></i>
-                                        <span>{{ $company->location ?? 'Nationwide Service' }}</span>
+                                        <span>
+                                            @if(!empty($company->city) || !empty(optional($company->state)->code))
+                                                {{ trim(($company->city ?? '') . (isset($company->state) ? ', ' . $company->state->code : ''), ', ') }}
+                                            @else
+                                                Nationwide Service
+                                            @endif
+                                        </span>
                                     </div>
                                     <div class="mover-actions">
-                                        <a href="/company/{{ $company->slug ?? strtolower(str_replace(' ', '-', $company->name ?? 'company')) }}"
+                                        <a href="{{ route('front.company.profile', $company->slug) }}"
                                             class="btn btn-outline-primary flex-fill">
                                             View Profile
                                         </a>
@@ -344,13 +316,11 @@
 
                     <!-- Pagination -->
                     <div class="movers-pagination">
-                        <div class="pagination">
-                            <a href="#" class="page-link">Previous</a>
-                            <a href="#" class="page-link active">1</a>
-                            <a href="#" class="page-link">2</a>
-                            <a href="#" class="page-link">3</a>
-                            <a href="#" class="page-link">Next</a>
-                        </div>
+                        @if(isset($companies) && method_exists($companies, 'links'))
+                            <div class="d-flex justify-content-center mb-2">
+                                {!! $companies->withQueryString()->links() !!}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

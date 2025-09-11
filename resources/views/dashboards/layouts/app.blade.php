@@ -112,6 +112,7 @@
     <!--end::Modals-->
 
     @include('dashboards.layouts.partials.scripts')
+    @stack('scripts')
 
 </body>
 <!--end::Body-->

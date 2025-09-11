@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
+use Illuminate\Pagination\Paginator;
 use App\Models\BlogCategory;
 use App\Models\State;
 use App\Models\BestMovingPage;
@@ -25,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Route::aliasMiddleware('admin', \App\Http\Middleware\IsAdmin::class);
+
+        // Use Bootstrap 5 pagination views
+        Paginator::useBootstrapFive();
 
         View::composer('layouts.header', function ($view) {
             $view->with('headerBlogCategories', BlogCategory::orderBy('name')->get());

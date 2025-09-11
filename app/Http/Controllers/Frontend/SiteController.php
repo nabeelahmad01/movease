@@ -55,20 +55,34 @@ class SiteController extends Controller
         return view('pages.home', compact('reviews', 'featuredCompanies', 'topMovers', 'bottomMovers', 'blogs'));
     }
 
-    public function movers()
+    public function movers(Request $request)
     {
+        $q = trim((string)$request->get('q')) ?: null;
+
         $companies = Company::where('is_active', true)
-            ->with(['reviews', 'state'])
+            ->with(['state'])
             ->withAvg('reviews', 'rating')
             ->withCount('reviews')
-            ->paginate(12);
+            ->when($q, function ($query) use ($q) {
+                $query->where(function ($qq) use ($q) {
+                    $qq->where('name', 'LIKE', "%$q%")
+                        ->orWhere('city', 'LIKE', "%$q%")
+                        ->orWhereHas('state', function ($s) use ($q) {
+                            $s->where('name', 'LIKE', "%$q%")
+                              ->orWhere('code', 'LIKE', "%$q%");
+                        });
+                });
+            })
+            ->orderBy('name')
+            ->paginate(12)
+            ->appends($request->query());
 
         $topMovers = TopMover::where('page', 'movers')
             ->with('company')
             ->orderBy('id')
             ->get();
 
-        return view('pages.movers', compact('companies', 'topMovers'));
+        return view('pages.movers', compact('companies', 'topMovers', 'q'));
     }
 
     public function listings()

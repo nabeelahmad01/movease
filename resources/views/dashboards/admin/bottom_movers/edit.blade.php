@@ -27,7 +27,4 @@
   </div>
 </form>
 @endsection
-@push('scripts')
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-<script>tinymce.init({ selector:'textarea[name=content]', height:300, menubar:false });</script>
-@endpush
+
