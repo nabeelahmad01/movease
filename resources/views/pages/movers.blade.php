@@ -26,7 +26,8 @@
                         <div class="row g-3 align-items-end">
                             <div class="col-md-10">
                                 <label for="q" class="form-label">Search by company, city or state</label>
-                                <input type="text" name="q" id="q" class="form-control" placeholder="e.g. Allied, Miami, Texas" value="{{ request('q') }}">
+                                <input type="text" name="q" id="q" class="form-control"
+                                    placeholder="e.g. Allied, Miami, Texas" value="{{ request('q') }}">
                             </div>
                             <div class="col-md-2 text-md-end text-center">
                                 <button type="submit" class="btn btn-primary w-100">
@@ -119,7 +120,14 @@
                         @forelse($companies ?? [] as $company)
                             <div class="mover-card">
                                 <div class="mover-header">
-                                    <div class="mover-logo">{{ strtoupper(substr($company->name ?? 'MC', 0, 2)) }}</div>
+                                    <div class="mover-logo">
+                                        @if ($company->logo)
+                                            <img src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo"
+                                                style="width:100px; height:auto;">
+                                        @else
+                                            <span>No Logo</span>
+                                        @endif
+                                    </div>
                                     <h4 class="mover-name">{{ $company->name ?? 'Professional Moving Company' }}</h4>
                                     <div class="mover-rating">
                                         <div class="star-rating">
@@ -157,7 +165,7 @@
                                     <div class="mover-location">
                                         <i class="fas fa-map-marker-alt"></i>
                                         <span>
-                                            @if(!empty($company->city) || !empty(optional($company->state)->code))
+                                            @if (!empty($company->city) || !empty(optional($company->state)->code))
                                                 {{ trim(($company->city ?? '') . (isset($company->state) ? ', ' . $company->state->code : ''), ', ') }}
                                             @else
                                                 Nationwide Service
@@ -316,7 +324,7 @@
 
                     <!-- Pagination -->
                     <div class="movers-pagination">
-                        @if(isset($companies) && method_exists($companies, 'links'))
+                        @if (isset($companies) && method_exists($companies, 'links'))
                             <div class="d-flex justify-content-center mb-2">
                                 {!! $companies->withQueryString()->links() !!}
                             </div>

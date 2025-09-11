@@ -360,3 +360,7 @@ svg{
         padding: 20px;
     }
 }
+ .no_logo {
+     font-size: 18px;
+     text-align: center;
+ }

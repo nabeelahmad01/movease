@@ -208,6 +208,10 @@
                 padding: 2rem;
                 box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             }
+             .no_logo{
+                font-size: 18px;
+                text-align: center;
+            }
         </style>
     @endpush
 
@@ -231,7 +235,12 @@
                     <div class="row align-items-center">
                         <div class="col-md-3 text-center">
                             <div class="company-logo-large">
-                                {{ substr($company->name, 0, 2) }}
+                                @if ($company->logo)
+                                    <img src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo"
+                                        style="width:100px; height:auto;">
+                                @else
+                                    <span>No Logo</span>
+                                @endif
                             </div>
                             <div class="rating-large">
                                 @for ($i = 1; $i <= 5; $i++)

@@ -105,7 +105,7 @@
                         </div>
 
                         <button type="button" class="btn btn-secondary prev-step">Back</button>
-                        <button type="button" class="btn btn-primary next-step">Continue</button>
+                        <button type="button" class="btn btn-primary next-step mt-4">Continue</button>
                     </div>
 
                     <!-- Step 3: Contact Information -->

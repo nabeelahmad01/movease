@@ -1,8 +1,10 @@
 @extends('layouts.master')
 @section('title', 'Write a Review for Moving Companies | MoveEase')
-@section('meta_description', 'Share your moving experience and help others find the best moving companies. Write honest
+@section('meta_description',
+    'Share your moving experience and help others find the best moving companies. Write honest
     reviews for moving companies you have used.')
-@section('meta_keywords', 'moving company reviews, write review, moving experience, rate movers, moving company
+@section('meta_keywords',
+    'moving company reviews, write review, moving experience, rate movers, moving company
     feedback')
 @section('canonical_url', route('front.review.create'))
 @section('og_title', 'Write a Review for Moving Companies | MoveEase')
@@ -155,6 +157,10 @@
             svg {
                 width: 30px !important;
             }
+            .no_logo{
+                font-size: 18px;
+                text-align: center;
+            }
         </style>
     @endpush
 
@@ -226,7 +232,12 @@
                         data-review-count="{{ $company->reviews->count() }}">
                         <div class="company-card">
                             <div class="company-logo">
-                                {{ strtoupper(substr($company->name, 0, 2)) }}
+                                @if ($company->logo)
+                                    <img src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo"
+                                        style="width:100px; height:auto;">
+                                @else
+                                    <span class="no_logo">No Logo</span>
+                                @endif
                             </div>
 
                             <h5 class="company-name">{{ $company->name }}</h5>

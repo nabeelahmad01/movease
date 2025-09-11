@@ -114,6 +114,10 @@
                 border-radius: 10px;
                 border: none;
             }
+             .no_logo{
+                font-size: 18px !important;
+                text-align: center;
+            }
         </style>
     @endpush
 
@@ -141,7 +145,12 @@
                 <div class="row align-items-center">
                     <div class="col-md-2">
                         <div class="company-logo">
-                            {{ strtoupper(substr($company->name, 0, 2)) }}
+                            @if ($company->logo)
+                                <img src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo"
+                                    style="width:100px; height:auto;">
+                            @else
+                                <span class="no_logo">No Logo</span>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-10">
