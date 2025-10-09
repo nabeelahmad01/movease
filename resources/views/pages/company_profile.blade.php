@@ -20,7 +20,7 @@
 
 
     @push('styles')
-        <link href="{{ asset('assets/css/company-profile.css') }}" rel="stylesheet">
+        <link href="{{ asset('/company-profile.css') }}" rel="stylesheet">
         <style>
             /* Enhanced Company Profile Styles */
             .company-profile {

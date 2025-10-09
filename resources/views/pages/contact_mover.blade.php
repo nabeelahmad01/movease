@@ -3,7 +3,7 @@
 @section('canonical_url', route('front.contact.mover.show', $company->slug))
 
 @push('styles')
-<link href="{{ asset('assets/css/get-quote.css') }}" rel="stylesheet">
+<link href="{{ asset('/get-quote.css') }}" rel="stylesheet">
 <style>
   .contact-hero{background:linear-gradient(135deg,#eef2ff 0,#f8f9ff 100%);padding:40px 0;border-bottom:1px solid #eee}
   .contact-card{background:#fff;border:1px solid #eee;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.06);padding:24px}

@@ -3,7 +3,7 @@
 @section('content')
 
     @push('styles')
-        <link href="{{ asset('assets/css/contact.css') }}" rel="stylesheet">
+        <link href="{{ asset('/contact.css') }}" rel="stylesheet">
     @endpush
 
     <!-- Hero Section -->

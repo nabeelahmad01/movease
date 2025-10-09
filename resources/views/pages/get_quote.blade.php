@@ -9,7 +9,7 @@
 @section('content')
 
     @push('styles')
-        <link href="{{ asset('assets/css/get-quote.css') }}" rel="stylesheet">
+        <link href="{{ asset('/get-quote.css') }}" rel="stylesheet">
     @endpush
 
     <!-- Hero Section -->

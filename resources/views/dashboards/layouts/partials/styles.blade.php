@@ -6,4 +6,4 @@
 <link href="{{ asset('backend_assets/plugins/custom/vis-timeline/vis-timeline.bundle.css') }}" rel="stylesheet" type="text/css" />
 
 <link href="{{ asset('backend_assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('backend_assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/style.bundle.css') }}" rel="stylesheet" type="text/css" />
