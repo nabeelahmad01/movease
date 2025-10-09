@@ -3,6 +3,573 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/resource.css') }}">
+    <style>
+        
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--dark-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 600;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 120px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.05"><polygon points="1000,100 1000,0 0,100"/></svg>');
+    background-size: cover;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-section p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.hero-section .btn {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-section .btn-warning {
+    background: var(--accent-color);
+    border: none;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.hero-section .btn-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+    background: #059669;
+}
+
+/* Search Form */
+.search-form {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    margin-top: 3rem;
+    position: relative;
+    z-index: 3;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Quote Form */
+.quote-form {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    margin-top: -50px;
+    position: relative;
+    z-index: 3;
+}
+
+.search-form .form-control,
+.search-form .form-select,
+.quote-form .form-control,
+.quote-form .form-select {
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    padding: 14px 18px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.search-form .form-control:focus,
+.search-form .form-select:focus,
+.quote-form .form-control:focus,
+.quote-form .form-select:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.15);
+    background: white;
+}
+
+.search-form .btn-primary,
+.quote-form .btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border: none;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+}
+
+.search-form .btn-primary:hover,
+.quote-form .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
+    background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+}
+
+/* Features Section */
+.features-section {
+    padding: 80px 0;
+    background: var(--light-bg);
+}
+
+.feature-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    height: 100%;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.feature-card .icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: white;
+}
+
+.feature-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: var(--light-text);
+    line-height: 1.6;
+}
+
+/* Companies Section */
+.companies-section {
+    padding: 80px 0;
+}
+
+.company-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    height: 100%;
+    cursor: pointer;
+}
+
+.company-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.company-logo {
+    width: 80px;
+    height: 80px;
+    background: var(--light-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.company-card h5 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.rating {
+    margin-bottom: 1rem;
+}
+
+.rating .fa-star {
+    color: var(--accent-color);
+    margin-right: 2px;
+}
+
+.company-card .btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 25px;
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.company-card .btn-outline-primary:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+/* Reviews Section */
+.reviews-section {
+    padding: 80px 0;
+    background: var(--light-bg);
+}
+
+.review-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    height: 100%;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.reviewer-avatar {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    margin-right: 1rem;
+}
+
+.reviewer-name {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.review-text {
+    color: var(--light-text);
+    font-style: italic;
+    line-height: 1.6;
+}
+
+/* CTA Section */
+.cta-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-section .btn {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+/* Media Logos */
+.media-logos {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.media-logo {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+}
+
+.media-logo:hover {
+    color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-section p {
+        font-size: 1.1rem;
+    }
+    
+    .search-form,
+    .quote-form {
+        margin-top: 2rem;
+        padding: 1.5rem;
+    }
+    
+    .feature-card,
+    .company-card,
+    .review-card {
+        margin-bottom: 2rem;
+    }
+    
+    .media-logos {
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .media-logo {
+        font-size: 1.5rem;
+    }
+}
+/* Company Box */
+.company-box {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 2px solid #e6ecec;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    margin-right: 5px !important;
+    height: 460px !important;
+}
+
+.company-box:hover {
+    transform: translateY(-8px);
+}
+
+/* Decorative Shape 1 */
+.company-box .bg-shape {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 485px;
+    height: 110px;
+    background: #25718012;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+
+
+/* Ribbon only for first card */
+.ribbon {
+    position: absolute;
+    top: 20px;
+    left: -45px;
+    transform: rotate(-45deg);
+    background: linear-gradient(135deg, #257180, #2c8d9f);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 45px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.5px;
+}
+
+/* Badge style for other cards */
+.badge {
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+
+/* Stars */
+.stars {
+    font-size: 14px;
+    color: #f5a623;
+}
+
+.company_logo {
+    width: 175px;
+    background-color: #f0f5f6;
+    padding: 15px;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.company_logo img {
+    border-radius: 10px;
+}
+
+.company_details .card-li {
+    margin: 10px auto;
+    min-height: 80px !important;
+    max-width: 270px;
+}
+
+.card-li li {
+
+    font-family: var(---heding);
+    font-weight: 400;
+    color: var(--secondary-color);
+    padding-block: 1px;
+    font-size: 16px;
+    line-height: 21px !important;
+}
+
+.card-li li img {
+    margin-right: 6px;
+    width: 13px;
+}
+
+.stars_list li i {
+    color: #ff8d3d;
+    font-size: 22px;
+    padding: 0 2px;
+}
+
+.company_details h5 {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(---heding);
+}
+
+.get-btn a {
+    background-color: #257180;
+    text-decoration: none;
+    font-family: var(---heding);
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+}
+.mover-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+}
+
+.mover-card h4 {
+    color: #257180;
+}
+
+.mover-card button {
+    background: #257180;
+    border: none;
+}
+
+.mover-card button:hover {
+    background: #1c5c66;
+}
+
+.toggle-details {
+    color: #257180;
+    cursor: pointer;
+}
+
+.toggle-icon {
+    font-size: 1.2rem;
+    color: #257180;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.toggle-icon.rotate {
+    transform: rotate(180deg);
+}
+
+.corner-ribbon {
+    position: absolute;
+    top: -3px;
+    /* card ke upar uthaya */
+    left: 20px;
+    /* ya right:20px; kar sakte ho */
+    background: #f15a24;
+    /* orange */
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 12px;
+    text-align: center;
+    z-index: 2;
+
+    /* pointed tail shape */
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+
+    /* thoda shadow dene ke liye */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.packing-calculator .card {
+    background: #fff;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.12);
+    border: 2px solid #25718021;
+}
+
+.packing-calculator button {
+    background: #257180;
+    border: none;
+}
+
+.packing-calculator button:hover {
+    background: #1d5d68;
+}
+    </style>
 @endpush
 @section('content')
     <section class="py-5 bg-light">

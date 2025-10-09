@@ -1,4 +1,10 @@
 <!--begin::Javascript-->
+<script>
+    
+</script>
+<script></script>
+<script></script>
+
 
 <script src="{{ asset('backend_assets/plugins/global/plugins.bundle.js') }}"></script>
 <script src="{{ asset('backend_assets/js/scripts.bundle.js') }}"></script>

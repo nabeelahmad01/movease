@@ -8,6 +8,56 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
+    <style>
+        .admin-root{min-height:100vh;background:#f5f7fb}
+/* Sidebar */
+.admin-sidebar{width:300px;background:#ffffff}
+.admin-sidebar .nav{gap:.15rem}
+.admin-sidebar .nav-link{color:#334155;border-radius:8px;padding:.5rem .75rem;font-weight:500}
+.admin-sidebar .nav-link:hover{background:#f1f5f9}
+.admin-sidebar .nav-link.active{background:#e2e8f0;color:#0f172a}
+.admin-sidebar .nav-group{margin:.25rem 0}
+.admin-sidebar .nav-group .btn-toggle{background:transparent;border:0;color:#334155;padding:.5rem .75rem;border-radius:8px;font-weight:600}
+.admin-sidebar .nav-group .btn-toggle:hover{background:#f1f5f9}
+.admin-sidebar .nav-group .btn-toggle:focus{box-shadow:none}
+
+/* Offcanvas sidebar (mobile) */
+.offcanvas-sidebar{width:300px}
+
+/* Topbar */
+.admin-topbar{height:56px;position:sticky;top:0;z-index:1020}
+
+/* Cards */
+.card{border:0;border-radius:12px}
+.card.shadow-sm{box-shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.1)}
+.card.metric-card .icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.card.metric-card .value{font-size:1.75rem;line-height:1.1}
+.card.metric-card .sub{color:#64748b;font-size:.85rem}
+
+/* Tables */
+.table>thead>tr>th{font-weight:600;color:#0f172a;background:#f8fafc}
+
+/* Utilities */
+.text-muted-2{color:#64748b}
+.rounded-10{border-radius:10px}
+.rounded-12{border-radius:12px}
+.bg-surface{background:#f8fafc}
+.bg-gradient-blue{background:linear-gradient(135deg,#3b82f6 0%,#2563eb 100%);color:#fff}
+.bg-gradient-amber{background:linear-gradient(135deg,#f59e0b 0%,#d97706 100%);color:#fff}
+.bg-gradient-emerald{background:linear-gradient(135deg,#10b981 0%,#059669 100%);color:#fff}
+.bg-gradient-rose{background:linear-gradient(135deg,#f43f5e 0%,#e11d48 100%);color:#fff}
+
+/* Forms */
+.form-control{border-radius:10px}
+
+/* Responsive tweaks */
+@media (max-width: 767.98px){
+  .admin-sidebar{display:none}
+  .admin-main{min-width:0}
+  .admin-topbar .fw-semibold{font-size:1rem}
+}
+
+    </style>
     @stack('styles')
 </head>
 
