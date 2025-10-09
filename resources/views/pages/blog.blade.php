@@ -13,7 +13,7 @@
 
 
     @push('styles')
-        <link href="{{ asset('/blog.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/blog.css') }}" rel="stylesheet">
         <style>
             svg {
                 width: 30px !important;

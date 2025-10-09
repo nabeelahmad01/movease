@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('title', $page->meta_title ?? $page->page_name . ' | MoveEase')
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('/home.css') }}">
-    <link rel="stylesheet" href="{{ asset('/resource.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/resource.css') }}">
 @endpush
 @section('content')
     <section class="py-5 bg-light">

@@ -3,7 +3,7 @@
 @section('content')
 
     @push('styles')
-        <link href="{{ asset('/movers.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/movers.css') }}" rel="stylesheet">
     @endpush
 
     <!-- Hero Section -->
