@@ -14,7 +14,7 @@
 
 
     @push('styles')
-        <link href="{{ asset('/home.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/home.css') }}" rel="stylesheet">
     @endpush
 
     <!-- Hero Section -->
