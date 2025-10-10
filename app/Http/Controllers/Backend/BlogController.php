@@ -46,7 +46,7 @@ class BlogController extends Controller
     public function edit(Blog $blog)
     {
         $categories = BlogCategory::orderBy('name')->get();
-        return view('dashboards.admin.blogs_edit', compact('blog','categories'));
+        return view('dashboards.admin.blogs.edit', compact('blog','categories'));
     }
 
     public function update(Request $request, Blog $blog)
