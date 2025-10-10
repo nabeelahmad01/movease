@@ -36,15 +36,85 @@
         .section-title {
             font-weight: 700;
         }
-    </style>
 @endpush
 
 @section('content')
+
+    <!-- SEO Schema Markup -->
+    @php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "WebPage",
+        "name" => $state->name ?? 'State' . ' Cities & City Routes | MoveEase',
+        "description" => "Browse cities in " . $state->name ?? 'State' . " and find popular city-to-city moving routes. Compare moving costs and find verified movers for your interstate relocation.",
+        "url" => request()->url(),
+        "isPartOf" => [
+            "@type" => "WebSite",
+            "name" => "MoveEase",
+            "url" => url('/')
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "url" => url('/'),
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/logo.png')
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer service",
+                "availableLanguage" => "English"
+            ]
+        ],
+        "breadcrumb" => [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "item" => [
+                        "@id" => url('/'),
+                        "name" => "Home"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "item" => [
+                        "@id" => route('front.routes.index'),
+                        "name" => "Moving Routes"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 3,
+                    "item" => [
+                        "@id" => request()->url(),
+                        "name" => $state->name ?? 'State' . " Cities"
+                    ]
+                ]
+            ]
+        ],
+        "mainEntity" => [
+            "@type" => "Place",
+            "name" => $state->name ?? 'State',
+            "address" => [
+                "@type" => "PostalAddress",
+                "addressRegion" => $state->name ?? 'State',
+                "addressCountry" => "US"
+            ]
+        ]
+    ];
+    @endphp
+
+    <script type="application/ld+json">
+    {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
     <section class="routes-hero">
         <div class="container">
             <div class="row align-items-center g-4">
                 <div class="col-lg-6">
-                    <h1>{{ $state->name }} Cities & Routes</h1>
                     <p class="lead mb-4">Pick a city to see movers and popular routes within {{ $state->name }}.</p>
                 </div>
                 <div class="col-lg-6">

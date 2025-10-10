@@ -2,6 +2,70 @@
 @section('title', 'Write Review for {{ $company->name }} | MoveEase')
 @section('content')
 
+    <!-- SEO Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Write Review for {{ $company->name }} | MoveEase",
+        "description": "Share your moving experience with {{ $company->name }}. Help other customers by writing an honest review about their moving services and customer satisfaction.",
+        "url": "{{ request()->url() }}",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "MoveEase",
+            "url": "{{ url('/') }}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "MoveEase",
+            "url": "{{ url('/') }}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ asset('assets/images/logo.png') }}"
+            },
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "availableLanguage": "English"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "{{ url('/') }}",
+                        "name": "Home"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "@id": "{{ route('front.company.profile', $company->slug) }}",
+                        "name": "{{ $company->name }}"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item": {
+                        "@id": "{{ request()->url() }}",
+                        "name": "Write Review"
+                    }
+                }
+            ]
+        },
+        "mainEntity": {
+            "@type": "WebPage",
+            "name": "Write Review Form",
+            "description": "Form to submit customer reviews for {{ $company->name }} moving company"
+        }
+    }
+    </script>
+
     @push('styles')
         <style>
             /* Review Form Styles */

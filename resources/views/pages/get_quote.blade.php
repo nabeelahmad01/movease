@@ -6,7 +6,85 @@
         <meta name="robots" content="noindex,follow">
     @endpush
 @endif
+@extends('layouts.master')
+@section('title', 'Get Quote | MoveEase')
+@section('canonical_url', route('front.get.quote'))
+@if (request()->has('zip_from') || request()->has('zip_to'))
+    @push('head')
+        <meta name="robots" content="noindex,follow">
+    @endpush
+@endif
 @section('content')
+
+    <!-- SEO Schema Markup -->
+    @php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "WebPage",
+        "name" => "Get Quote | MoveEase",
+        "description" => "Get instant moving quotes from FMCSA verified interstate moving companies. Compare prices and services for your long-distance relocation needs.",
+        "url" => route('front.get.quote'),
+        "isPartOf" => [
+            "@type" => "WebSite",
+            "name" => "MoveEase",
+            "url" => url('/')
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "url" => url('/'),
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/logo.png')
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer service",
+                "availableLanguage" => "English"
+            ]
+        ],
+        "breadcrumb" => [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "item" => [
+                        "@id" => url('/'),
+                        "name" => "Home"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "item" => [
+                        "@id" => route('front.get.quote'),
+                        "name" => "Get Quote"
+                    ]
+                ]
+            ]
+        ],
+        "mainEntity" => [
+            "@type" => "Service",
+            "name" => "Moving Quote Service",
+            "description" => "Get instant quotes from verified moving companies for interstate relocations",
+            "provider" => [
+                "@type" => "Organization",
+                "name" => "MoveEase"
+            ]
+        ]
+    ];
+    @endphp
+
+    @if (request()->has('zip_from') || request()->has('zip_to'))
+        @push('head')
+            <meta name="robots" content="noindex,follow">
+        @endpush
+    @endif
+
+    <script type="application/ld+json">
+    {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
 
     @push('styles')
         <link href="{{ asset('/get-quote.css') }}" rel="stylesheet">
@@ -16,8 +94,6 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-weight: 600;
 }
-
-/* Hero Section */
 .quote-hero {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: white;
@@ -736,51 +812,9 @@ h1, h2, h3, h4, h5, h6 {
                                 input.value = postal.long_name;
                                 hint.textContent = full;
                                 input.classList.remove('is-invalid');
-                            } else {
-                                delete input.dataset.postal;
-                                input.classList.add('is-invalid');
-                                hint.textContent = '';
                             }
                         });
-                    }
-                    attachAutocomplete('zip_from', 'zip_from_suggestion');
-                    attachAutocomplete('zip_to', 'zip_to_suggestion');
-                })();
-            </script>
-            <script>
-                (function() {
-                    if (!window.google) return;
-                    const mapEl = document.getElementById('routeMap');
-                    if (!mapEl) return;
-
-                    const map = new google.maps.Map(mapEl, {
-                        center: {
-                            lat: 39.8283,
-                            lng: -98.5795
-                        },
-                        zoom: 4,
-                        disableDefaultUI: true,
-                        draggable: false,
-                        scrollwheel: false,
-                        disableDoubleClickZoom: true,
-                        keyboardShortcuts: false,
-                        gestureHandling: 'none'
                     });
-
-                    const directionsService = new google.maps.DirectionsService();
-                    const directionsRenderer = new google.maps.DirectionsRenderer({
-                        map,
-                        draggable: false,
-                        suppressMarkers: false
-                    });
-
-                    const zipFrom = document.getElementById('zip_from');
-                    const zipTo = document.getElementById('zip_to');
-
-                    let timer;
-
-                    function debounced(fn, wait = 350) {
-                        clearTimeout(timer);
                         timer = setTimeout(fn, wait);
                     }
 

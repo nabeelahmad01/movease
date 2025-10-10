@@ -400,6 +400,70 @@ h1, h2, h3, h4, h5, h6 {
 @endpush
 
 @section('content')
+
+    <!-- SEO Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Contact {{ $company->name }} | MoveEase",
+        "description": "Contact {{ $company->name }} directly through MoveEase. Get in touch for moving quotes, services, and inquiries for your interstate relocation needs.",
+        "url": "{{ route('front.contact.mover.show', $company->slug) }}",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "MoveEase",
+            "url": "{{ url('/') }}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "MoveEase",
+            "url": "{{ url('/') }}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ asset('assets/images/logo.png') }}"
+            },
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "availableLanguage": "English"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "{{ url('/') }}",
+                        "name": "Home"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "@id": "{{ route('front.company.profile', $company->slug) }}",
+                        "name": "{{ $company->name }}"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item": {
+                        "@id": "{{ route('front.contact.mover.show', $company->slug) }}",
+                        "name": "Contact"
+                    }
+                }
+            ]
+        },
+        "mainEntity": {
+            "@type": "ContactPage",
+            "name": "Contact {{ $company->name }}",
+            "description": "Contact page for {{ $company->name }} moving company"
+        }
+    }
+    </script>
 <section class="contact-hero">
   <div class="container">
     <div class="d-flex align-items-center justify-content-between flex-wrap">

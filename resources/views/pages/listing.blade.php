@@ -1,6 +1,67 @@
 @extends('layouts.master')
 @section('title', 'Company Listings | MoveEase')
 @section('content')
+
+    <!-- SEO Schema Markup -->
+    @php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "WebPage",
+        "name" => "Company Listings | MoveEase",
+        "description" => "Browse all verified moving companies in our directory. Find FMCSA certified interstate movers with ratings, reviews, and contact information.",
+        "url" => route('front.listing'),
+        "isPartOf" => [
+            "@type" => "WebSite",
+            "name" => "MoveEase",
+            "url" => url('/')
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "url" => url('/'),
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/logo.png')
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer service",
+                "availableLanguage" => "English"
+            ]
+        ],
+        "breadcrumb" => [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "item" => [
+                        "@id" => url('/'),
+                        "name" => "Home"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "item" => [
+                        "@id" => route('front.listing'),
+                        "name" => "Company Listings"
+                    ]
+                ]
+            ]
+        ],
+        "mainEntity" => [
+            "@type" => "ItemList",
+            "name" => "Moving Companies Directory",
+            "description" => "Complete directory of FMCSA verified moving companies for interstate moves"
+        ]
+    ];
+    @endphp
+
+    <script type="application/ld+json">
+    {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
+
     <div class="container py-5">
         <h2 class="mb-4 text-center">All Moving Companies</h2>
         <form class="row mb-4 justify-content-center">

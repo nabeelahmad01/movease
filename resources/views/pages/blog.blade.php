@@ -5,12 +5,74 @@
 @section('meta_keywords', 'moving tips, moving guides, packing tips, moving blog, interstate moving advice, moving
     resources, professional moving tips')
 @section('canonical_url', route('front.blog'))
-@section('og_title', 'Moving Tips & Resources Blog | MoveEase')
 @section('og_description', 'Expert moving tips, guides, and resources to make your move stress-free.')
 @section('og_type', 'blog')
 @section('content')
 
+    <!-- SEO Schema Markup -->
+    @php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "WebPage",
+        "name" => "Moving Tips & Resources Blog | MoveEase",
+        "description" => "Expert moving tips, guides, and resources to make your move stress-free. Read professional advice on packing, planning, and choosing the right movers.",
+        "url" => route('front.blog'),
+        "isPartOf" => [
+            "@type" => "WebSite",
+            "name" => "MoveEase",
+            "url" => url('/')
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "url" => url('/'),
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/logo.png')
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer service",
+                "availableLanguage" => "English"
+            ]
+        ],
+        "breadcrumb" => [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "item" => [
+                        "@id" => url('/'),
+                        "name" => "Home"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "item" => [
+                        "@id" => route('front.blog'),
+                        "name" => "Blog"
+                    ]
+                ]
+            ]
+        ],
+        "mainEntity" => [
+            "@type" => "Blog",
+            "name" => "MoveEase Moving Blog",
+            "description" => "Expert moving tips, guides, and resources for stress-free relocations",
+            "url" => route('front.blog'),
+            "publisher" => [
+                "@type" => "Organization",
+                "name" => "MoveEase"
+            ]
+        ]
+    ];
+    @endphp
 
+    <script type="application/ld+json">
+    {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
 
     @push('styles')
         <link href="{{ asset('assets/css/blog.css') }}" rel="stylesheet">

@@ -7,10 +7,73 @@
     'moving company reviews, write review, moving experience, rate movers, moving company
     feedback')
 @section('canonical_url', route('front.review.create'))
-@section('og_title', 'Write a Review for Moving Companies | MoveEase')
 @section('og_description', 'Share your moving experience and help others find the best moving companies.')
 @section('og_type', 'website')
 @section('content')
+
+    <!-- SEO Schema Markup -->
+    @php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "WebPage",
+        "name" => "Write a Review for Moving Companies | MoveEase",
+        "description" => "Share your moving experience and help others find the best moving companies. Write honest reviews for moving companies you have used.",
+        "url" => route('front.review.create'),
+        "isPartOf" => [
+            "@type" => "WebSite",
+            "name" => "MoveEase",
+            "url" => url('/')
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "url" => url('/'),
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/logo.png')
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer service",
+                "availableLanguage" => "English"
+            ]
+        ],
+        "breadcrumb" => [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "item" => [
+                        "@id" => url('/'),
+                        "name" => "Home"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "item" => [
+                        "@id" => route('front.review.create'),
+                        "name" => "Write a Review"
+                    ]
+                ]
+            ]
+        ],
+        "mainEntity" => [
+            "@type" => "WebPage",
+            "name" => "Write Moving Company Review",
+            "description" => "Page for customers to write and submit reviews for moving companies",
+            "primaryImageOfPage" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/review-form.jpg')
+            ]
+        ]
+    ];
+    @endphp
+
+    <script type="application/ld+json">
+    {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
 
     @push('styles')
         <style>

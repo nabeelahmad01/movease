@@ -2,10 +2,75 @@
 @section('title', $cityName . ' Movers - ' . $stateName . ' Moving Services | MoveEase')
 @section('meta_description', 'Find reliable movers in ' . $cityName . ', ' . $stateName . '. Get free quotes from local
     moving companies. Professional ' . $cityName . ' moving services with competitive pricing.')
-@section('meta_keywords', $cityName . ' movers, moving companies ' . $cityName . ' ' . $stateName . ', ' . $cityName . '
     moving services, local movers ' . $cityName)
 
 @section('content')
+
+    <!-- SEO Schema Markup -->
+    @php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "WebPage",
+        "name" => $cityName . ' Movers - ' . $stateName . ' Moving Services | MoveEase',
+        "description" => "Find reliable movers in " . $cityName . ', ' . $stateName . '. Get free quotes from local moving companies. Professional ' . $cityName . ' moving services with competitive pricing.',
+        "url" => request()->url(),
+        "isPartOf" => [
+            "@type" => "WebSite",
+            "name" => "MoveEase",
+            "url" => url('/')
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "url" => url('/'),
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/logo.png')
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer service",
+                "availableLanguage" => "English"
+            ]
+        ],
+        "breadcrumb" => [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "item" => [
+                        "@id" => url('/'),
+                        "name" => "Home"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "item" => [
+                        "@id" => request()->url(),
+                        "name" => $cityName . " Movers"
+                    ]
+                ]
+            ]
+        ],
+        "mainEntity" => [
+            "@type" => "Place",
+            "name" => $cityName . ', ' . $stateName,
+            "address" => [
+                "@type" => "PostalAddress",
+                "addressLocality" => $cityName,
+                "addressRegion" => $stateName,
+                "addressCountry" => "US"
+            ]
+        ]
+    ];
+    @endphp
+
+    <script type="application/ld+json">
+    {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
+
     <!-- Hero Section -->
     <section class="hero-section bg-primary text-white py-5">
         <div class="container">

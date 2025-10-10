@@ -2,6 +2,69 @@
 @section('title', 'About Us | MoveEase')
 @section('content')
 
+    <!-- SEO Schema Markup -->
+    @php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "WebPage",
+        "name" => "About Us | MoveEase",
+        "description" => "Learn about MoveEase - your trusted platform for finding and comparing FMCSA verified interstate moving companies. We help you make informed decisions for your long-distance move.",
+        "url" => route('front.about'),
+        "isPartOf" => [
+            "@type" => "WebSite",
+            "name" => "MoveEase",
+            "url" => url('/')
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "url" => url('/'),
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/logo.png')
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer service",
+                "availableLanguage" => "English"
+            ]
+        ],
+        "breadcrumb" => [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "item" => [
+                        "@id" => url('/'),
+                        "name" => "Home"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "item" => [
+                        "@id" => route('front.about'),
+                        "name" => "About Us"
+                    ]
+                ]
+            ]
+        ],
+        "mainEntity" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "description" => "MoveEase is a trusted platform that connects customers with FMCSA verified interstate moving companies, providing transparent reviews, quotes, and booking services.",
+            "url" => url('/'),
+            "foundingDate" => "2024",
+            "sameAs" => [url('/')]
+        ]
+    ];
+    @endphp
+
+    <script type="application/ld+json">
+    {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
+
     @push('styles')
         <style>
             /* About Page Styles */

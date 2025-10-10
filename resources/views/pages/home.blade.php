@@ -11,6 +11,59 @@
 @section('og_type', 'website')
 @section('content')
 
+   <!-- SEO Schema Markup -->
+@php
+$schema = [
+    "@context" => "https://schema.org",
+    "@type" => "WebPage",
+    "name" => "Best Interstate Moving Companies - MoveEase",
+    "description" => "Find trusted FMCSA verified interstate moving companies. Compare quotes, read reviews, and book the best long-distance movers for your relocation needs.",
+    "url" => route('front.home'),
+    "isPartOf" => [
+        "@type" => "WebSite",
+        "name" => "MoveEase",
+        "url" => url('/')
+    ],
+    "publisher" => [
+        "@type" => "Organization",
+        "name" => "MoveEase",
+        "url" => url('/'),
+        "logo" => [
+            "@type" => "ImageObject",
+            "url" => asset('assets/images/logo.png')
+        ],
+        "contactPoint" => [
+            "@type" => "ContactPoint",
+            "contactType" => "customer service",
+            "availableLanguage" => "English"
+        ]
+    ],
+    "breadcrumb" => [
+        "@type" => "BreadcrumbList",
+        "itemListElement" => [
+            [
+                "@type" => "ListItem",
+                "position" => 1,
+                "item" => [
+                    "@id" => url('/'),
+                    "name" => "Home"
+                ]
+            ]
+        ]
+    ],
+    "mainEntity" => [
+        "@type" => "Organization",
+        "name" => "MoveEase",
+        "description" => "MoveEase helps you find and compare trusted FMCSA verified interstate moving companies. Get quotes, read reviews, and book the best long-distance movers.",
+        "url" => url('/'),
+        "sameAs" => [url('/')]
+    ]
+];
+@endphp
+
+<script type="application/ld+json">
+{!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+</script>
 
 
     @push('styles')

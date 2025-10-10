@@ -85,15 +85,73 @@
                 });
             }
         })();
-    </script>
 @endpush
 
 @section('content')
+
+    <!-- SEO Schema Markup -->
+    @php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "WebPage",
+        "name" => "Routes | State-to-State & City-to-City | MoveEase",
+        "description" => "Browse popular moving routes across the United States. Find state-to-state and city-to-city moving options with estimated costs and verified movers.",
+        "url" => route('front.routes.index'),
+        "isPartOf" => [
+            "@type" => "WebSite",
+            "name" => "MoveEase",
+            "url" => url('/')
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "url" => url('/'),
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/logo.png')
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer service",
+                "availableLanguage" => "English"
+            ]
+        ],
+        "breadcrumb" => [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "item" => [
+                        "@id" => url('/'),
+                        "name" => "Home"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "item" => [
+                        "@id" => route('front.routes.index'),
+                        "name" => "Moving Routes"
+                    ]
+                ]
+            ]
+        ],
+        "mainEntity" => [
+            "@type" => "ItemList",
+            "name" => "Moving Routes Directory",
+            "description" => "Directory of popular state-to-state and city-to-city moving routes with costs and mover information"
+        ]
+    ];
+    @endphp
+
+    <script type="application/ld+json">
+    {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
     <section class="routes-hero">
         <div class="container">
             <div class="row align-items-center g-4">
                 <div class="col-lg-6">
-                    <h1>State-to-State & City-to-City Routes</h1>
                     <p class="lead mb-4">Explore popular moving routes or get a fast moving cost estimate.</p>
                 </div>
                 <div class="col-lg-6">

@@ -17,6 +17,78 @@
 @section('og_type', 'business.business')
 @section('content')
 
+    <!-- SEO Schema Markup -->
+    @php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "WebPage",
+        "name" => $company->name . ' Reviews & Information | MoveEase',
+        "description" => "Read reviews and get information about " . $company->name . ". Compare moving services, prices, and customer feedback for your interstate move.",
+        "url" => route('front.company.profile', $company->slug),
+        "isPartOf" => [
+            "@type" => "WebSite",
+            "name" => "MoveEase",
+            "url" => url('/')
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "url" => url('/'),
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/logo.png')
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer service",
+                "availableLanguage" => "English"
+            ]
+        ],
+        "breadcrumb" => [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "item" => [
+                        "@id" => url('/'),
+                        "name" => "Home"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "item" => [
+                        "@id" => route('front.company.profile', $company->slug),
+                        "name" => $company->name
+                    ]
+                ]
+            ]
+        ],
+        "mainEntity" => [
+            "@type" => "Organization",
+            "name" => $company->name,
+            "description" => $company->description ?? 'Professional moving company providing interstate relocation services',
+            "url" => route('front.company.profile', $company->slug),
+            "address" => [
+                "@type" => "PostalAddress",
+                "addressLocality" => $company->city ?? '',
+                "addressRegion" => $company->state->name ?? '',
+                "addressCountry" => "US"
+            ],
+            "aggregateRating" => [
+                "@type" => "AggregateRating",
+                "ratingValue" => $company->reviews_avg_rating ?? 4.5,
+                "reviewCount" => $company->reviews_count ?? 0
+            ]
+        ]
+    ];
+    @endphp
+
+    <script type="application/ld+json">
+    {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
+
 
 
     @push('styles')

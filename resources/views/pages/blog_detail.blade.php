@@ -2,6 +2,88 @@
 @section('title', '{{ $blog->title }} | MoveEase')
 @section('content')
 
+    <!-- SEO Schema Markup -->
+    @php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "WebPage",
+        "name" => $blog->title . ' | MoveEase',
+        "description" => $blog->excerpt ?? strip_tags($blog->content ?? ''),
+        "url" => request()->url(),
+        "isPartOf" => [
+            "@type" => "WebSite",
+            "name" => "MoveEase",
+            "url" => url('/')
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "url" => url('/'),
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/logo.png')
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer service",
+                "availableLanguage" => "English"
+            ]
+        ],
+        "breadcrumb" => [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "item" => [
+                        "@id" => url('/'),
+                        "name" => "Home"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "item" => [
+                        "@id" => route('front.blog'),
+                        "name" => "Blog"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 3,
+                    "item" => [
+                        "@id" => request()->url(),
+                        "name" => $blog->title
+                    ]
+                ]
+            ]
+        ],
+        "mainEntity" => [
+            "@type" => "Article",
+            "headline" => $blog->title,
+            "description" => $blog->excerpt ?? strip_tags($blog->content ?? ''),
+            "author" => [
+                "@type" => "Organization",
+                "name" => "MoveEase"
+            ],
+            "publisher" => [
+                "@type" => "Organization",
+                "name" => "MoveEase",
+                "logo" => [
+                    "@type" => "ImageObject",
+                    "url" => asset('assets/images/logo.png')
+                ]
+            ],
+            "datePublished" => $blog->created_at ?? now()->toISOString(),
+            "dateModified" => $blog->updated_at ?? now()->toISOString()
+        ]
+    ];
+    @endphp
+
+    <script type="application/ld+json">
+    {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
+
     @push('styles')
         <style>
             /* Blog Detail Styles */

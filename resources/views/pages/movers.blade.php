@@ -2,6 +2,66 @@
 @section('title', 'Find Professional Movers | MoveEase')
 @section('content')
 
+    <!-- SEO Schema Markup -->
+    @php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "WebPage",
+        "name" => "Find Professional Movers | MoveEase",
+        "description" => "Browse our directory of professional, FMCSA verified moving companies. Compare ratings, read reviews, and find the perfect mover for your interstate relocation needs.",
+        "url" => route('front.movers'),
+        "isPartOf" => [
+            "@type" => "WebSite",
+            "name" => "MoveEase",
+            "url" => url('/')
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "url" => url('/'),
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/logo.png')
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer service",
+                "availableLanguage" => "English"
+            ]
+        ],
+        "breadcrumb" => [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "item" => [
+                        "@id" => url('/'),
+                        "name" => "Home"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "item" => [
+                        "@id" => route('front.movers'),
+                        "name" => "Moving Companies"
+                    ]
+                ]
+            ]
+        ],
+        "mainEntity" => [
+            "@type" => "ItemList",
+            "name" => "Moving Companies Directory",
+            "description" => "Directory of professional FMCSA verified moving companies for interstate moves"
+        ]
+    ];
+    @endphp
+
+    <script type="application/ld+json">
+    {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
+
     @push('styles')
         <link href="{{ asset('assets/css/movers.css') }}" rel="stylesheet">
         <style>

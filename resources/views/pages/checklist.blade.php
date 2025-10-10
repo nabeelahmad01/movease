@@ -2,6 +2,66 @@
 @section('title', 'Moving Checklist | MoveEase')
 @section('content')
 
+    <!-- SEO Schema Markup -->
+    @php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "WebPage",
+        "name" => "Moving Checklist | MoveEase",
+        "description" => "Complete moving checklist to help you plan and organize your interstate move. Step-by-step guide for a stress-free relocation with verified moving companies.",
+        "url" => route('front.checklist'),
+        "isPartOf" => [
+            "@type" => "WebSite",
+            "name" => "MoveEase",
+            "url" => url('/')
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "url" => url('/'),
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/logo.png')
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer service",
+                "availableLanguage" => "English"
+            ]
+        ],
+        "breadcrumb" => [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "item" => [
+                        "@id" => url('/'),
+                        "name" => "Home"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "item" => [
+                        "@id" => route('front.checklist'),
+                        "name" => "Moving Checklist"
+                    ]
+                ]
+            ]
+        ],
+        "mainEntity" => [
+            "@type" => "HowTo",
+            "name" => "Moving Checklist",
+            "description" => "Step-by-step moving checklist for planning and executing a successful interstate move"
+        ]
+    ];
+    @endphp
+
+    <script type="application/ld+json">
+    {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
+
     @push('styles')
         <style>
             .checklist-hero {

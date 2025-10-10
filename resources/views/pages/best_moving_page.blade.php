@@ -572,6 +572,74 @@ h1, h2, h3, h4, h5, h6 {
     </style>
 @endpush
 @section('content')
+
+    <!-- SEO Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "{{ $page->meta_title ?? $page->page_name . ' | MoveEase' }}",
+        "description": "{{ $page->meta_description ?? strip_tags($page->content ?? '') }}",
+        "url": "{{ request()->url() }}",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "MoveEase",
+            "url": "{{ url('/') }}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "MoveEase",
+            "url": "{{ url('/') }}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ asset('assets/images/logo.png') }}"
+            },
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "availableLanguage": "English"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "{{ url('/') }}",
+                        "name": "Home"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "@id": "{{ request()->url() }}",
+                        "name": "{{ $page->page_name }}"
+                    }
+                }
+            ]
+        },
+        "mainEntity": {
+            "@type": "Article",
+            "headline": "{{ $page->page_name }}",
+            "description": "{{ $page->meta_description ?? strip_tags($page->content ?? '') }}",
+            "author": {
+                "@type": "Organization",
+                "name": "MoveEase"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "MoveEase",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "{{ asset('assets/images/logo.png') }}"
+                }
+            }
+        }
+    }
+    </script>
     <section class="py-5 bg-light">
         <div class="container">
             <div class="col-lg-10 mx-auto">

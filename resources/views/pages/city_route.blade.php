@@ -1,6 +1,75 @@
 @extends('layouts.master')
 @section('title', ($route->title ?? 'City Route') . ' | MoveEase')
 @section('content')
+
+    <!-- SEO Schema Markup -->
+    @php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "WebPage",
+        "name" => $route->title ?? 'City Route' . ' | MoveEase',
+        "description" => "Moving route information for " . $route->title ?? 'city-to-city move' . ". Find costs, distance, and verified moving companies for this city route.",
+        "url" => request()->url(),
+        "isPartOf" => [
+            "@type" => "WebSite",
+            "name" => "MoveEase",
+            "url" => url('/')
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "url" => url('/'),
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/logo.png')
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer service",
+                "availableLanguage" => "English"
+            ]
+        ],
+        "breadcrumb" => [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "item" => [
+                        "@id" => url('/'),
+                        "name" => "Home"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "item" => [
+                        "@id" => route('front.routes.index'),
+                        "name" => "Moving Routes"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 3,
+                    "item" => [
+                        "@id" => request()->url(),
+                        "name" => $route->title ?? 'Route'
+                    ]
+                ]
+            ]
+        ],
+        "mainEntity" => [
+            "@type" => "Trip",
+            "name" => $route->title ?? 'Moving Route',
+            "description" => "Moving route details including distance, estimated costs, and moving company information"
+        ]
+    ];
+    @endphp
+
+    <script type="application/ld+json">
+    {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
+
     <div class="container py-5">
         <h1 class="fw-bold mb-3">{{ $route->title ?? 'Moving Route' }}</h1>
         <div class="row g-3">

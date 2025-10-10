@@ -2,6 +2,66 @@
 @section('title', 'Contact Us | MoveEase')
 @section('content')
 
+    <!-- SEO Schema Markup -->
+    @php
+    $schema = [
+        "@context" => "https://schema.org",
+        "@type" => "WebPage",
+        "name" => "Contact Us | MoveEase",
+        "description" => "Get in touch with MoveEase for all your interstate moving questions. Contact our customer service team for support, quotes, and moving assistance.",
+        "url" => route('front.contact'),
+        "isPartOf" => [
+            "@type" => "WebSite",
+            "name" => "MoveEase",
+            "url" => url('/')
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "MoveEase",
+            "url" => url('/'),
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => asset('assets/images/logo.png')
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer service",
+                "availableLanguage" => "English"
+            ]
+        ],
+        "breadcrumb" => [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "item" => [
+                        "@id" => url('/'),
+                        "name" => "Home"
+                    ]
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "item" => [
+                        "@id" => route('front.contact'),
+                        "name" => "Contact Us"
+                    ]
+                ]
+            ]
+        ],
+        "mainEntity" => [
+            "@type" => "ContactPage",
+            "name" => "Contact MoveEase",
+            "description" => "Contact MoveEase for interstate moving company information, quotes, and customer support."
+        ]
+    ];
+    @endphp
+
+    <script type="application/ld+json">
+    {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
+
     @push('styles')
         <link href="{{ asset('/contact.css') }}" rel="stylesheet">
         <style>
