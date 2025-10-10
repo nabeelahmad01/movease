@@ -40,7 +40,7 @@ class BlogController extends Controller
         }
         $data['user_id'] = $request->user()->id ?? 1;
         $blog = Blog::create($data);
-        return redirect()->route('admin.blogs.index')->with('success','Blog created');
+        return redirect()->route('admin.blogs.index')->with('success','Blog create ho gaya hai! ✅');
     }
 
     public function edit(Blog $blog)
@@ -66,12 +66,12 @@ class BlogController extends Controller
             $data['featured_image'] = $request->file('featured_image')->store('blogs','public');
         }
         $blog->update($data);
-        return redirect()->route('admin.blogs.index')->with('success','Blog updated');
+        return redirect()->route('admin.blogs.index')->with('success','Blog update ho gaya hai! ✅');
     }
 
     public function destroy(Blog $blog)
     {
         $blog->delete();
-        return redirect()->route('admin.blogs.index')->with('success','Blog deleted');
+        return redirect()->route('admin.blogs.index')->with('success','Blog delete ho gaya hai! 🗑️');
     }
 }

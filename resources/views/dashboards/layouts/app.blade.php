@@ -90,6 +90,64 @@
 
                 @include('dashboards.layouts.partials.header')
 
+                <!--begin::Flash Messages-->
+                @if(session('success'))
+                <div class="container-xxl">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div class="d-flex align-items-center">
+                            <i class="ki-duotone ki-check-circle fs-2 text-success me-3"><span class="path1"></span><span class="path2"></span></i>
+                            <div class="d-flex flex-column">
+                                <span class="fw-bold">{{ session('success') }}</span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+                @endif
+
+                @if(session('error'))
+                <div class="container-xxl">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <div class="d-flex align-items-center">
+                            <i class="ki-duotone ki-cross-circle fs-2 text-danger me-3"><span class="path1"></span><span class="path2"></span></i>
+                            <div class="d-flex flex-column">
+                                <span class="fw-bold">{{ session('error') }}</span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+                @endif
+
+                @if(session('warning'))
+                <div class="container-xxl">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <div class="d-flex align-items-center">
+                            <i class="ki-duotone ki-information fs-2 text-warning me-3"><span class="path1"></span><span class="path2"></span></i>
+                            <div class="d-flex flex-column">
+                                <span class="fw-bold">{{ session('warning') }}</span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+                @endif
+
+                @if(session('info'))
+                <div class="container-xxl">
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <div class="d-flex align-items-center">
+                            <i class="ki-duotone ki-information fs-2 text-info me-3"><span class="path1"></span><span class="path2"></span></i>
+                            <div class="d-flex flex-column">
+                                <span class="fw-bold">{{ session('info') }}</span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+                @endif
+                <!--end::Flash Messages-->
+
                 <div class="content fs-6 d-flex flex-column flex-column-fluid" id="kt_content">
                     <div class="post fs-6 d-flex flex-column-fluid" id="kt_post">
                         <div class=" container-xxl ">

@@ -51,7 +51,7 @@ class CompanyController extends Controller
             $data['logo'] = $request->file('logo')->store('companies','public');
         }
         Company::create($data);
-        return redirect()->route('admin.companies.index')->with('success','Company created');
+        return redirect()->route('admin.companies.index')->with('success','Company create ho gayi hai! ✅');
     }
 
     public function edit(Company $company)
@@ -87,13 +87,13 @@ class CompanyController extends Controller
             $data['logo'] = $request->file('logo')->store('companies','public');
         }
         $company->update($data);
-        return redirect()->route('admin.companies.index')->with('success','Company updated');
+        return redirect()->route('admin.companies.index')->with('success','Company update ho gayi hai! ✅');
     }
 
     public function destroy(Company $company)
     {
         $company->delete();
-        return redirect()->route('admin.companies.index')->with('success','Company deleted');
+        return redirect()->route('admin.companies.index')->with('success','Company delete ho gayi hai! 🗑️');
     }
 
     public function citiesByState(State $state)

@@ -23,7 +23,7 @@
     <div class="col-md-3"><label class="form-label">Point Three</label><input name="point_three" class="form-control"></div>
     <div class="col-md-3 form-check ms-3 align-self-end"><input class="form-check-input" type="checkbox" name="deposit_required" id="dep"><label class="form-check-label" for="dep">Deposit Required</label></div>
     <div class="col-12"><label class="form-label">Content</label><textarea name="content" class="form-control" rows="6"></textarea></div>
-    <div class="col-12"><button class="btn btn-primary">Submit</button></div>
+    <div class="col-12"><button type="submit" class="btn btn-primary">Submit</button></div>
   </div>
 </form>
 @endsection

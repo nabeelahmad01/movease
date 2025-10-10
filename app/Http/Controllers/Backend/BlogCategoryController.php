@@ -28,7 +28,7 @@ class BlogCategoryController extends Controller
         ]);
         if (empty($data['slug'])) { $data['slug'] = Str::slug($data['name']); }
         BlogCategory::create($data);
-        return redirect()->route('admin.blog-categories.create')->with('success','Category created');
+        return redirect()->route('admin.blog-categories.create')->with('success','Blog Category create ho gayi hai! ✅');
     }
 
     public function edit(BlogCategory $blog_category)
@@ -45,12 +45,12 @@ class BlogCategoryController extends Controller
         ]);
         if (empty($data['slug'])) { $data['slug'] = Str::slug($data['name']); }
         $blog_category->update($data);
-        return redirect()->route('admin.blog-categories.edit')->with('success','Category updated');
+        return redirect()->route('admin.blog-categories.index', $blog_category)->with('success','Blog Category update ho gayi hai! ✅');
     }
 
     public function destroy(BlogCategory $blog_category)
     {
         $blog_category->delete();
-        return redirect()->route('admin.blog-categories.index')->with('success','Category deleted');
+        return redirect()->route('admin.blog-categories.index')->with('success','Blog Category delete ho gayi hai! 🗑️');
     }
 }

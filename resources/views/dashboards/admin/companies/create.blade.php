@@ -35,7 +35,7 @@
         <select name="status" class="form-select"><option value="active">Active</option><option value="pending">Pending</option><option value="suspended">Suspended</option></select>
       </div>
       <div class="col-md-4"><label class="form-label">Logo</label><input type="file" name="logo" class="form-control"></div>
-      <div class="col-12"><button class="btn btn-primary">Save</button></div>
+      <div class="col-12"><button type="submit" class="btn btn-primary">Save</button></div>
     </div>
   </form>
 </div>
